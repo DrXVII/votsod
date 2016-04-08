@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="asciiworld" />
+		<Option pch_mode="2" />
+		<Option compiler="clang" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/asciiworld" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="clang" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add library="ncurses" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/asciiworld" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="clang" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Weverything" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/Char.h" />
+		<Unit filename="include/Char_Human.h" />
+		<Unit filename="include/Map.h" />
+		<Unit filename="include/Tile.h" />
+		<Unit filename="include/Tile_Empty.h" />
+		<Unit filename="include/Tile_Wall.h" />
+		<Unit filename="include/Tiles.h" />
+		<Unit filename="include/Viewport.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Char.cpp" />
+		<Unit filename="src/Char_Human.cpp" />
+		<Unit filename="src/Map.cpp" />
+		<Unit filename="src/Tile.cpp" />
+		<Unit filename="src/Tile_Empty.cpp" />
+		<Unit filename="src/Tile_Wall.cpp" />
+		<Unit filename="src/Viewport.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
