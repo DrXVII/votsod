@@ -1,0 +1,29 @@
+(core)
+- Large dungeon levels with some rooms/regions having special characteristics
+- Different styles of levels, and/or areas in levels (still randomly generated):
+ - traditional rooms and corridors (level style)
+ - round rooms (location/level style)
+ - halls with and without pillars (location/level style)
+ - rooms and walk-through rooms, few corridors [diablo-like, diablo2 dungeons] (level style)
+ - outer and inner sanctum (level style)
+ - traditional church rooms (location)
+ - chapels (location)
+ - non-traditional church rooms (location)
+- Unlit tiles and tiles outside of sight are not displayed at all, 
+making it rather difficult to retrace.
+- A recurring town, retaining the things you left there, appearing now and then
+all around the dungeon. (every level?) Offering things to buy, sell, refuge,
+healing, etc. (npc party members can be found, recruited here? (hunting
+parties?, for specific type(s) of mobs?))
+
+(?)
+- mobs can be grouped, certain groups would be native to a certain type of a
+level or locale.
+
+(???)
+- question: will the levels be fully persistent or maybe just to an extent. ?
+- (?parts of a level may change with time)
+
+(?????)
+- what's the END-GAME? Is there a certain reachable goal? - Should be I think,
+at least in the dungeon (maybe a boss and an exit out? hmm? sounds nice :) )

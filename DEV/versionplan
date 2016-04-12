@@ -1,0 +1,60 @@
+0.1
+[DONE]->Up/Down/Left/Right movement
+[DONE]->read map from ascii text file
+->Mobs
+0.2
+->Items that are wearable, equippable, consumable, usable (keys, etc)
+->inventory
+0.3
+->Ability to purchase items
+0.4
+->grey on black colourscheme
+->colours
+0.5
+->hunger and thirst
+0.6
+-> the village in the dungeon
+0.7
+->Crafting
+0.8
+->Building
+0.9
+->?possibility for different tiles to have the same icon but different colour
+1.0
+-> water (as in underground water in the dungeon maze(s))
+
+Deicide on version
+<>
+->hit locations and wounds
+->bleeding
+->healing
+<>
+->stats
+->skills
+<>
+->special abilities (player)
+<>
+->mini bosses
+<>
+->special abilities (mobs)
+<>
+->big boss(es)
+<>
+->environmental hazards
+<>
+hidden rooms
+pushing
+climbing
+crawling
+<>
+
+Expansion(s)
+-> the outside
+-> the z dimension
+-> landmarks (e.g. pile of lanterns)
+-> geological landmarks
+-> region(s) that is(are) more dangerous (as in chance of tougher monsters)
+-> environmental hazards
+-> flying monsters (in more dangerous regions only?)
+-> seas, boats and islands.
+-> human companions, hunting parties

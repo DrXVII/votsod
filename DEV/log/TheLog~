@@ -1,0 +1,60 @@
+[NEW SESSION] : 2015-10-16[17:00:00]Friday
+[20:00:00] v0.00.1 - The start of the project, some basic matrix and map print f
+unctions.
+[END OF SESSION] : 2015-10-17[20:00:00]Friday
+Session time: 03:00:00
+Project time: 0d. 03:00:00
+
+[NEW SESSION] : 2015-10-17[19:05:14]Saturday
+[19:24:42] Changed heading.
+[19:25:30] Changer the wellcome screen.
+[20:03:37] Created character, basic movement and rendering capabilities.
+I'm calling this v0.0.02
+[20:31:36] Fixed the map print algorithm and resized to leave bottom for info 
+in future UI implementations.
+[20:43:23] The base map filling algorhythm is now fully tested and working.
+[END OF SESSION] : 2015-10-17[20:45:17]Saturday
+Session time: 01:40:03
+Project time: 0d. 04:40:03
+
+[NEW SESSION] : 2015-10-19[01:38:45]Monday
+[01:58:48] Updated the project mind-map with ideas and some tasks.
+[END OF SESSION] : 2015-10-19[01:59:30]Monday
+Session time: 00:20:45
+Project time: 0d. 05:00:48
+
+[NEW SESSION] : 2015-10-21[19:31:34]Wednesday
+[20:57:21] Added walls and collisions.
+[END OF SESSION] : 2015-10-21[21:16:08]Wednesday
+Session time: 01:44:34
+Project time: 0d. 06:45:22
+
+[NEW SESSION] : 2015-10-21[22:30:00]Wednesday
+[00:07:35] First edition of viewport... consider a better solution.
+[END OF SESSION] : 2015-10-22[00:08:17]Thursday
+Session time: 01:38:17
+Project time: 0d. 08:23:39
+
+[NEW SESSION] : 2015-10-24[13:51:25]Saturday
+[15:12:33] Implemented level building from an ASCII text file.
+[15:13:38] Due to it being more efficient to load the level line by line as
+opposed to column by column, changed the games display coordinate profile to
+y,x instead of x,y.
+[END OF SESSION] : 2015-10-24[15:15:55]Saturday
+Session time: 01:54:31
+Project time: 0d. 10:18:10
+
+[NEW SESSION] : 2015-10-26[19:30:51]Monday
+[19:30:56] Made a more intricate map with a plain text editor.
+[END OF SESSION] : 2015-10-26[19:42:56]Monday
+Session time: 00:12:05
+Project time: 0d. 10:30:15
+
+[NEW SESSION] : 2015-10-28[07:33:46]Wednesday
+[08:16:18] Wrote down some intended features, and came up with a rough version
+plan. Naturally, this is just preliminary.
+[08:18:38] Defined some code ideas of the game.
+[END OF SESSION] : 2015-10-28[08:19:43]Wednesday
+Session time: 00:45:57
+Project time: 0d. 11:16:12
+
