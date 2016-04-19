@@ -1,13 +1,13 @@
 #include "Map.h"
 
-Map::Map(string _mapFile){
-
+Map::Map(const string& _filename)
+{
   int lineItr = -1; //iterator to iterate through the x while filling level
   fstream file; //level file stream
   string line; //the string to be filled with getline();
   vector<Tile*> v1;//empty tile vector to fill the first dimension of Vtiles;
 
-  file.open(_mapFile, fstream::in | fstream::binary);
+  file.open(_filename, fstream::in | fstream::binary);
   if(file.fail()){
     mvprintw(5, 10, "Error while opening level file!");
     getch();
@@ -40,6 +40,48 @@ Map::Map(string _mapFile){
 
 //TODO destroy Vtiles
 Map::~Map(){}
+
+bool Map::LoadMapFile(const string& _filename)
+{
+  /*TODO figure out what is throwing the 'illegal instruction' error in this
+  function and remove the duplicate logic from the consturctor.
+  Don't forget to handle the error thrown in calling code */
+  int lineItr = -1; //iterator to iterate through the x while filling level
+  fstream file; //level file stream
+  string line; //the string to be filled with getline();
+  vector<Tile*> v1;//empty tile vector to fill the first dimension of Vtiles;
+
+  file.open(_filename, fstream::in | fstream::binary);
+  if(file.fail()){
+    mvprintw(5, 10, "Error while opening level file!");
+    getch();
+    return 1;
+  }
+
+  do{
+    getline(file, line);
+    if(!file.eof()){
+      Vtiles.push_back(v1);
+      lineItr += 1;
+      for(int i = 0; i < line.size(); i++){
+        switch(line[i]){
+        case '.':
+          Vtiles[lineItr].push_back(new Tile_Empty);
+          break;
+        case '#':
+          Vtiles[lineItr].push_back(new Tile_Wall);
+          break;
+        default:
+          Vtiles[lineItr].push_back(new Tile);
+        }
+      }
+    }
+    else{
+      mvprintw(23, 0, "Level built.");
+    }
+  }while(!file.eof());
+  file.close();
+}
 
 Tile Map::GetTile(int _y, int _x){
   if(_y < Vtiles.size() && _x < Vtiles[_y].size()){

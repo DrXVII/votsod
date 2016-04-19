@@ -15,9 +15,10 @@ using namespace std;
 
 class Map{
   public:
-    Map(string _mapFile);
+    Map(const string& _filename);
     virtual ~Map();
 
+    bool LoadMapFile(const string& _filename);
     Tile GetTile(int _x, int _y);
     char GetTileIcon(int _x, int _y);
     int GetTilemapW();

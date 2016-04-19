@@ -67,3 +67,64 @@
 1446905472 source:/home/egidijus/MY/Creative/programming/cpp/asciiworld/src/Char_Human.cpp
 	"Char_Human.h"
 
+1446899239 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Char.cpp
+	"Char.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Char.h
+	<ncurses.h>
+
+1446905472 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Char_Human.cpp
+	"Char_Human.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Char_Human.h
+	<Char.h>
+
+1445458384 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Tile.cpp
+	"Tile.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Tile.h
+
+1445447970 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Tile_Empty.cpp
+	"Tile_Empty.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Tile_Empty.h
+	<Tile.h>
+
+1445447982 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Tile_Wall.cpp
+	"Tile_Wall.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Tile_Wall.h
+	<Tile.h>
+
+1446902049 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Viewport.cpp
+	"Viewport.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Viewport.h
+	"Map.h"
+	"Char.h"
+
+1461031739 /home/egidijus/MY/creative/programming/cpp/votsod/include/Map.h
+	<vector>
+	<string>
+	<fstream>
+	<ncurses.h>
+	"Tiles.h"
+	"Char.h"
+	"Char_Human.h"
+
+1460436770 /home/egidijus/MY/creative/programming/cpp/votsod/include/Tiles.h
+	"Tile.h"
+	"Tile_Empty.h"
+	"Tile_Wall.h"
+
+1461031786 source:/home/egidijus/MY/creative/programming/cpp/votsod/main.cpp
+	<string>
+	<fstream>
+	<ncurses.h>
+	"Map.h"
+	"Char.h"
+	"Viewport.h"
+
+1461024758 source:/home/egidijus/MY/creative/programming/cpp/votsod/src/Map.cpp
+	"Map.h"
+
