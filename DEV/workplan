@@ -1,0 +1,61 @@
+=== Objectives =================================================================
+- Organise project repository and throw out the rubbish.
+- Flesh out the core of the engine
+-- core machanics
+-- basic AI/mobs
+-- basic level generation
+-- line of sight
+
+=== Steps ======================================================================
+
+# Flesh out the core of the engine
+(the idea is to make a reusable engine skeleton)
+
+## core mechanics
+- implement treating the main char as one of the char objects in the map
+	and render as such. (Throw away the hard-stamped '@' at middle of view-port
+	placeholder)
+	  [salvaged old description]
+		- Create an array of char objects in the Map object
+		- place main char in the array
+		- reconfigure viewport accordingly
+					v	v	v
+		- later base the mob class inheritance off of the Character class
+		- then the main char and all the mobs and npc's would perform their turns as
+		system iterates through the array
+		[END]
+
+- reintroduce wall collisions
+
+## basic AI/mobs
+- basic mobs
+-- introduce an AI-less mob (let's consider it a training dummy :D )
+-- implement basic mob AI (only homing for now)
+
+## basic level generation
+- generate a random level (for now some generic rooms connected with corridors)
+	for testing
+
+## line of sight
+- basic line of sight (no worries about obstacles for now)
+-- player (display render)
+-- mob AI behaviour
+
+=== Ideas ======================================================================
+
+# Core Engine mechanics
+- Levels of illumination
+-- Calculate per tile
+-- Effects on line of sight
+-- Illuminating with objects (sconces, carried torches or other equipment)
+
+- Flowing fluids.
+
+# Gameplay
+- The player will the ability to enter a person's inner world at certain
+	circumstances. Each world would have a certain flavour depending on the
+	main principality/inhabitants. Each world would be unique as it would be
+	randomly generated each time in accordance to the prevalent theme of the
+	level.
+
+- open spaces

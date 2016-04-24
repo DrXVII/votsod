@@ -35,7 +35,7 @@ void start(int _cmd);
 void ncursesInit();//initialise ncurses mode and set initialisation params/funcs
 void printInCentre(int _ln, string _s);//prints _s centered on line _ln
 
-string gmVer = "v0.0.20 || 2015-10-24[15:15:55]Saturday";
+string gmVer = "v0.0.20a || 2015-10-24[15:15:55]Saturday";
 
 int main(){
   int cmd = ' ';

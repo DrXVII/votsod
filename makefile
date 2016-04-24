@@ -19,3 +19,4 @@ objects: $(src)
 
 clean:
 	rm -fr *.o
+	rm bin/votsod
