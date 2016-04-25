@@ -2,7 +2,7 @@
 - Organise project repository
 - Create an initial design for the engine core
 - Flesh out engine core
--- core machanics
+-- core mechanics
 -- basic AI/mobs
 -- basic level generation
 -- line of sight
@@ -73,4 +73,4 @@
 	randomly generated each time in accordance to the prevalent theme of the
 	level.
 
-- open space enviornment
+- open space environments
