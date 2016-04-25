@@ -1,14 +1,28 @@
 === Objectives =================================================================
-- Organise project repository and throw out the rubbish.
-- Flesh out the core of the engine
+- Organise project repository
+- Create an initial design for the engine core
+- Flesh out engine core
 -- core machanics
 -- basic AI/mobs
 -- basic level generation
 -- line of sight
 
 === Steps ======================================================================
+# Organise project repository
+-----------------------------
+- check and throw out the unnecessary doc files left over form asciiworld
+-- [x] text docs, ideas, etc
+-- xmind project maps
+-- diagrams
+- [x] reorganise code files in repo
+-- [x] deicide on the repo structure
+-- [x] create a makefile
 
-# Flesh out the core of the engine
+# Create an initial design for the engine core
+----------------------------------------------
+
+# Flesh out engine core
+-----------------------
 (the idea is to make a reusable engine skeleton)
 
 ## core mechanics
@@ -42,8 +56,8 @@
 -- mob AI behaviour
 
 === Ideas ======================================================================
-
 # Core Engine mechanics
+-----------------------
 - Levels of illumination
 -- Calculate per tile
 -- Effects on line of sight
@@ -52,6 +66,7 @@
 - Flowing fluids.
 
 # Gameplay
+----------
 - The player will have the ability to enter a person's inner world at certain
 	circumstances. Each world would have a certain flavour depending on the
 	main principality/inhabitants. Each world would be unique as it would be
