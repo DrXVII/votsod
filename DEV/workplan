@@ -27,10 +27,16 @@
 (the idea is to make a reusable engine skeleton)
 
 ## core mechanics
-- implement treating the main char as one of the char objects in the map
+- reintroduce wall collisions
+-- create a System class to handle higher level processes of the program
+-- implement actor action handling in the Map class
+
+- refactor code. The current style is inconsistent and quite far from ISO.
+
+- implement treating of the main char as one of the char objects in the map
 	and render as such. (Throw away the hard-stamped '@' at middle of view-port
 	placeholder)
-	  [salvaged old description]
+	[salvaged old description]
 		- Create an array of char objects in the Map object
 		- place main char in the array
 		- reconfigure viewport accordingly
@@ -38,9 +44,7 @@
 		- later base the mob class inheritance off of the Character class
 		- then the main char and all the mobs and npc's would perform their turns as
 		system iterates through the array
-		[END]
-
-- reintroduce wall collisions
+	[END]
 
 ## basic AI/mobs
 - basic mobs
@@ -69,9 +73,9 @@
 # Gameplay
 ----------
 - The player will have the ability to enter a person's inner world at certain
-	circumstances. Each world would have a certain flavour depending on the
-	main principality/inhabitants. Each world would be unique as it would be
+	circumstances. Each world will have a certain flavour depending on the
+	main principality/inhabitants. Each world will be unique as it will be
 	randomly generated each time in accordance to the prevalent theme of the
 	level.
 
-- open space environments
+- outdoor environments
