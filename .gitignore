@@ -1,10 +1,2 @@
-# linux
-obj/**
-bin/Debug/votsod
-bin/Debug/asciiworld
-asciiworld.layout
-
-# windows
-obj\**
-bin\Debug\votsod.exe
-bin\Debug\asciiworld.exe
+bin/votsod
+*.o
