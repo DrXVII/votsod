@@ -1,8 +1,8 @@
 /*
  *******************************************************************************
- **                                                                           **
- **    This is an ascii graphics RPG. That's that for now... ;)               **
- **                                                                           **
+ **																																					 **
+ **		This is an ascii graphics RPG. That's that for now... ;)							 **
+ **																																					 **
  *******************************************************************************
 */
 
@@ -13,7 +13,6 @@
 /*TODO - think on a more elegant viewport solution, consider placing the main
 character into the character array of a map object. Then viewport would work
 differently, and more elegantly.*/
-//TODO move the welcome and goodbye screens out of main()
 /*TODO - due to different arrays containing items to be seen, consider
 implementing a screen buffer instead of several print passes.*/
 //TODO - destructors for classes storing objects in the heap
@@ -32,61 +31,74 @@ implementing a screen buffer instead of several print passes.*/
 using namespace std;
 
 void start(int _cmd);
-void ncursesInit();//initialise ncurses mode and set initialisation params/funcs
-void printInCentre(int _ln, string _s);//prints _s centered on line _ln
+void init_ncurses();//initialise ncurses mode and set initialisation params/funcs
+void print_cen(int _ln, string _s);//prints _s centered on line _ln
+void wellcome();
+void goodbye();
 
 string gmVer = "v0.0.20a || 2015-10-24[15:15:55]Saturday";
 
-int main(){
-  int cmd = ' ';
+int main()
+{
+	int cmd = ' ';
 
-  ncursesInit();
-
-  printInCentre(8, "Hello everyone.");
-  printInCentre(10, "Welcome to ASCIIWORLD!");
-  printInCentre(12, "I do hope you will enjoy your visit.");
-  printInCentre(13, "Press 'q' when you shall desire to leave.");
-  printInCentre(20, gmVer);
-  refresh();
-  getch();
-
-  start(cmd);
-
-  clear();
-  printInCentre(8, "I do hope you enjoyed your stay.");
-  printInCentre(9, "Se you next time :)");
-  getch();
-
-  endwin();//end ncurses mode
-  return 0;
+	init_ncurses();
+	wellcome();
+	start(cmd);
+	goodbye();
+	
+	endwin();//end ncurses mode
+	return 0;
 }
 
-void start(int _cmd){
-  Map lMap("tstTxt");
+void start(int _cmd)
+{
+	Map lMap("tstTxt");
 	System system;
-  //lMap.LoadMapFile("tstTxt");
-  lMap.test_make_char();
-  Viewport mainView(0, 0, 19, 61);
+	//lMap.LoadMapFile("tstTxt");
+	lMap.test_make_char();
+	Viewport mainView(0, 0, 19, 61);
 
-  while(_cmd != 'q'){
-    clear();
-    mainView.Print(lMap, lMap.test_get_char());
-    refresh();
+	while(_cmd != 'q'){
+		clear();
+		mainView.Print(lMap, lMap.test_get_char());
+		refresh();
 
-    //_cmd = lMap.NextTurn();
+		//_cmd = lMap.NextTurn();
 		_cmd = system.startTurn(lMap);
-  }
+	}
 }
 
-void ncursesInit(){
-  initscr();//start ncurses mode
-  //initialisation functions
-  raw();//pass all keyboard input to the program, avoiding terminal interupts
-  noecho();//do not echo chars to terminal
-  keypad(stdscr, true);//enable arrow keys, F1, F2 ,etc... for stdscr
-  curs_set(0);//hide the cursor
+void init_ncurses()
+{
+	initscr();//start ncurses mode
+	//initialisation functions
+	raw();//pass all keyboard input to the program, avoiding terminal interupts
+	noecho();//do not echo chars to terminal
+	keypad(stdscr, true);//enable arrow keys, F1, F2 ,etc... for stdscr
+	curs_set(0);//hide the cursor
 }
 
-void printInCentre(int _ln, string _s){
-  mvprintw(_ln, (80 / 2) - (_s.size() / 2), _s.c_str());
+void wellcome()
+{
+	print_cen(8, "Hello everyone.");
+	print_cen(10, "Welcome to ASCIIWORLD!");
+	print_cen(12, "I do hope you will enjoy your visit.");
+	print_cen(13, "Press 'q' when you shall desire to leave.");
+	print_cen(20, gmVer);
+	refresh();
+	getch();
+}
+
+void goodbye()
+{
+	clear();
+	print_cen(8, "I do hope you enjoyed your stay.");
+	print_cen(9, "Se you next time :)");
+	getch();
+}
+
+void print_cen(int _ln, string _s)
+{
+	mvprintw(_ln, (80 / 2) - (_s.size() / 2), _s.c_str());
 }

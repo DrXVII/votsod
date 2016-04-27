@@ -1,23 +1,28 @@
 #include "Char.h"
 
-Char::Char(int _x, int _y){
-  Icon = '@';
-  X = _x;
-  Y = _y;
+Char::Char(int _x, int _y)
+{
+	m_icon = '@';
+	m_x = _x;
+	m_y = _y;
 }
 
-Char::~Char(){
-  //dtor
+Char::~Char()
+{
+	//dtor
 }
 
-char Char::GetIcon(){
-  return Icon;
+char Char::get_icon()
+{
+	return m_icon;
 }
 
-int Char::GetX(){
-  return X;
+int Char::get_x()
+{
+	return m_x;
 }
 
-int Char::GetY(){
-  return Y;
+int Char::get_y()
+{
+	return m_y;
 }

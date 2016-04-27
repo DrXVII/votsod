@@ -5,11 +5,11 @@
 
 
 class Char_Human : public Char{
-  public:
-    Char_Human(int _x, int _y);
-    virtual ~Char_Human();
+	public:
+		Char_Human(int _x, int _y);
+		virtual ~Char_Human();
 
-    int TakeTurn();
+		int take_turn();
 };
 
 #endif // CHAR_HUMAN_H

@@ -4,20 +4,20 @@
 #include <ncurses.h>
 
 class Char{
-  public:
-    Char(int _x, int _y);
-    virtual ~Char();
+	public:
+		Char(int _x, int _y);
+		virtual ~Char();
 
-    virtual char GetIcon();
-    virtual int GetX();
-    virtual int GetY();
+		virtual char get_icon();
+		virtual int get_x();
+		virtual int get_y();
 
-    virtual int TakeTurn() = 0;
+		virtual int take_turn() = 0;
 
 
 
-    char Icon;
-    int X, Y;
+		char m_icon;
+		int m_x, m_y;
 };
 
 #endif // CHAR_H

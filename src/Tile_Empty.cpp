@@ -1,11 +1,11 @@
 #include "Tile_Empty.h"
 
 Tile_Empty::Tile_Empty(){
-  SetIcon('.');
-  SetPassable(true);
+	SetIcon('.');
+	SetPassable(true);
 }
 
 Tile_Empty::~Tile_Empty()
 {
-  //dtor
+	//dtor
 }
