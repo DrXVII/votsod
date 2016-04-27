@@ -27,7 +27,7 @@ class Map{
 		Char* test_get_char();
 		int NextTurn();
 	private:
-		vector<vector<Tile*> > Vtiles;
+		vector<vector<Tile*> > m_tiles;
 		vector<Char*> m_vChars;
 };
 

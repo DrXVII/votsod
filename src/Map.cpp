@@ -2,10 +2,10 @@
 
 Map::Map(const string& _filename)
 {
-	int lineItr = -1; //iterator to iterate through the x while filling level
+	int ln_iter = -1; //iterator to iterate through the x while filling level
 	fstream file; //level file stream
 	string line; //the string to be filled with getline();
-	vector<Tile*> v1;//empty tile vector to fill the first dimension of Vtiles;
+	vector<Tile*> v1;//empty tile vector to fill the first dimension of m_tiles;
 
 	file.open(_filename, fstream::in | fstream::binary);
 	if(file.fail()){
@@ -16,18 +16,18 @@ Map::Map(const string& _filename)
 	do{
 		getline(file, line);
 		if(!file.eof()){
-			Vtiles.push_back(v1);
-			lineItr += 1;
+			m_tiles.push_back(v1);
+			ln_iter += 1;
 			for(int i = 0; i < line.size(); i++){
 				switch(line[i]){
 				case '.':
-					Vtiles[lineItr].push_back(new Tile_Empty);
+					m_tiles[ln_iter].push_back(new Tile_Empty);
 					break;
 				case '#':
-					Vtiles[lineItr].push_back(new Tile_Wall);
+					m_tiles[ln_iter].push_back(new Tile_Wall);
 					break;
 				default:
-					Vtiles[lineItr].push_back(new Tile);
+					m_tiles[ln_iter].push_back(new Tile);
 				}
 			}
 		}
@@ -38,7 +38,7 @@ Map::Map(const string& _filename)
 	file.close();
 }
 
-//TODO destroy Vtiles
+//TODO destroy m_tiles
 Map::~Map(){}
 
 bool Map::LoadMapFile(const string& _filename)
@@ -46,10 +46,10 @@ bool Map::LoadMapFile(const string& _filename)
 	/*TODO figure out what is throwing the 'illegal instruction' error in this
 	function and remove the duplicate logic from the consturctor.
 	Don't forget to handle the error thrown in calling code */
-	int lineItr = -1; //iterator to iterate through the x while filling level
+	int ln_iter = -1; //iterator to iterate through the x while filling level
 	fstream file; //level file stream
 	string line; //the string to be filled with getline();
-	vector<Tile*> v1;//empty tile vector to fill the first dimension of Vtiles;
+	vector<Tile*> v1;//empty tile vector to fill the first dimension of m_tiles;
 
 	file.open(_filename, fstream::in | fstream::binary);
 	if(file.fail()){
@@ -61,18 +61,18 @@ bool Map::LoadMapFile(const string& _filename)
 	do{
 		getline(file, line);
 		if(!file.eof()){
-			Vtiles.push_back(v1);
-			lineItr += 1;
+			m_tiles.push_back(v1);
+			ln_iter += 1;
 			for(int i = 0; i < line.size(); i++){
 				switch(line[i]){
 				case '.':
-					Vtiles[lineItr].push_back(new Tile_Empty);
+					m_tiles[ln_iter].push_back(new Tile_Empty);
 					break;
 				case '#':
-					Vtiles[lineItr].push_back(new Tile_Wall);
+					m_tiles[ln_iter].push_back(new Tile_Wall);
 					break;
 				default:
-					Vtiles[lineItr].push_back(new Tile);
+					m_tiles[ln_iter].push_back(new Tile);
 				}
 			}
 		}
@@ -83,9 +83,10 @@ bool Map::LoadMapFile(const string& _filename)
 	file.close();
 }
 
-Tile Map::GetTile(int _y, int _x){
-	if(_y < Vtiles.size() && _x < Vtiles[_y].size()){
-		return *Vtiles[_y][_x];
+Tile Map::GetTile(int _y, int _x)
+{
+	if(_y < m_tiles.size() && _x < m_tiles[_y].size()){
+		return *m_tiles[_y][_x];
 	}
 	else{
 		mvprintw(20, 0, "ERROR: GetTile() Tried to probe a non-existant tile.");
@@ -98,10 +99,11 @@ Tile Map::GetTile(int _y, int _x){
 	}
 }
 
-char Map::GetTileIcon(int _y, int _x){
-	if(_y < Vtiles.size() && _x < Vtiles[_y].size()){
+char Map::GetTileIcon(int _y, int _x)
+{
+	if(_y < m_tiles.size() && _x < m_tiles[_y].size()){
 		char ret = 0;
-		ret = Vtiles[_y][_x]->get_icon();
+		ret = m_tiles[_y][_x]->get_icon();
 		if(ret == 0 || ret == ' '){
 			return '0';
 		}
@@ -118,15 +120,18 @@ char Map::GetTileIcon(int _y, int _x){
 	}
 }
 
-void Map::test_make_char(){
+void Map::test_make_char()
+{
 	m_vChars.push_back(new Char_Human(40, 10));
 }
 
-Char* Map::test_get_char(){
+Char* Map::test_get_char()
+{
 	return m_vChars[0];
 }
 //TODO - consider moving such functionality into a System class
-int Map::NextTurn(){
+int Map::NextTurn()
+{
 	int ret = ' ';
 	for(int i = 0; i < m_vChars.size(); i++){
 		ret = m_vChars[i]->take_turn();
@@ -137,10 +142,12 @@ int Map::NextTurn(){
 	return ret;
 }
 
-int Map::GetTilemapW(){
-	return Vtiles.size();
+int Map::GetTilemapW()
+{
+	return m_tiles.size();
 }
 
-int Map::GetTilemapH(){
-	return Vtiles[0].size();
+int Map::GetTilemapH()
+{
+	return m_tiles[0].size();
 }
