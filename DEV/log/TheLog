@@ -1,7 +1,7 @@
 [NEW SESSION] : 2015-10-16[17:00:00]Friday
 [20:00:00] v0.00.1 - The start of the project, some basic matrix and map print f
 unctions.
-[END OF SESSION] : 2015-10-17[20:00:00]Friday
+[END OF SESSION] : 2015-10-16[20:00:00]Friday
 Session time: 03:00:00
 Project time: 0d. 03:00:00
 
@@ -86,3 +86,12 @@ Since last entry:
 Session time: 04:02:15
 Project time: 0d. 19:12:55
 
+[NEW SESSION] : 2016-04-26[23:00:00]Sunday
+[01:00:00] Analyzed most of the old code, lots will have to change
+- begun implementing the System class
+- decided on the object structure for engine core
+- rewriting 75% of the program seems plausible in contrast to massive
+  code refactoring
+[END OF SESSION] : 2016-04-27[01:00:00]Sunday
+Session time: 02:00:00
+Project time: 0d. 21:12:55
