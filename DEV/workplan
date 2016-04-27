@@ -1,6 +1,6 @@
 === Objectives =================================================================
-- Organise project repository
-- Create an initial design for the engine core
+- [x] Organise project repository
+- [x]Create an initial design for the engine core
 - Flesh out engine core
 -- core mechanics
 -- basic AI/mobs
@@ -10,16 +10,17 @@
 === Steps ======================================================================
 # Organise project repository
 -----------------------------
-- check and throw out the unnecessary doc files left over form asciiworld
+- [x] check and throw out the unnecessary doc files left over form asciiworld
 -- [x] text docs, ideas, etc
--- xmind project maps
--- diagrams
+-- [x] xmind project maps
+-- [x] diagrams
 - [x] reorganise code files in repo
 -- [x] deicide on the repo structure
 -- [x] create a makefile
 
 # Create an initial design for the engine core
 ----------------------------------------------
+- [x] create a basic dia diagram to have a visualisation and work from there
 
 # Flesh out engine core
 -----------------------

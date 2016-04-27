@@ -6,11 +6,10 @@
  *******************************************************************************
 */
 
-/*TODO - create System():{} - for collissions, and other things;
-use System():{}; to get cmd information (e.g. KEY_DOWN) from Character.Action()
-(or Character.TakeTurn()) then in system():{}; process the key and send back
-data (e.g. tile probing results)
-*/
+//TODO implement actor moving/handling @ Map.NextTurn
+//TODO refactor code to conform to sanity and consistant style
+/*TODO store map objects and actors in a "list" array (vector's gonna get slow
+ * here)*/
 /*TODO - think on a more elegant viewport solution, consider placing the main
 character into the character array of a map object. Then viewport would work
 differently, and more elegantly.*/
@@ -28,6 +27,7 @@ implementing a screen buffer instead of several print passes.*/
 #include "Map.h"
 #include "Char.h"
 #include "Viewport.h"
+#include "System.h"
 
 using namespace std;
 
@@ -63,6 +63,7 @@ int main(){
 
 void start(int _cmd){
   Map lMap("tstTxt");
+	System system;
   //lMap.LoadMapFile("tstTxt");
   lMap.test_make_char();
   Viewport mainView(0, 0, 19, 61);
@@ -72,7 +73,8 @@ void start(int _cmd){
     mainView.Print(lMap, lMap.test_get_char());
     refresh();
 
-    _cmd = lMap.NextTurn();
+    //_cmd = lMap.NextTurn();
+		_cmd = system.startTurn(lMap);
   }
 }
 
