@@ -4,8 +4,7 @@
 #include <Tile.h>
 
 
-class Tile_Empty : public Tile
-{
+class Tile_Empty : public Tile{
 public:
 	Tile_Empty();
 	virtual ~Tile_Empty();
