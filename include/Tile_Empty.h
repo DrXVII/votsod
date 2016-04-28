@@ -6,11 +6,9 @@
 
 class Tile_Empty : public Tile
 {
-	public:
-		Tile_Empty();
-		virtual ~Tile_Empty();
-	protected:
-	private:
+public:
+	Tile_Empty();
+	virtual ~Tile_Empty();
 };
 
 #endif // TILE_EMPTY_H
