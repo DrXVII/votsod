@@ -4,18 +4,17 @@
 
 class Tile
 {
-	public:
-		Tile();
-		virtual ~Tile();
+public:
+	Tile();
+	virtual ~Tile();
 
-		char get_icon();
-		void SetIcon(char _icon);
-		bool GetPassable();
-		void SetPassable(bool _b);
-	protected:
-	private:
-		char Icon;
-		bool Passable;
+	char get_icon();
+	void set_icon(char _icon);
+	bool get_ispassable();
+	void set_ispassable(bool _b);
+private:
+	char m_icon;
+	bool m_ispassable;
 };
 
 #endif // TILE_H
