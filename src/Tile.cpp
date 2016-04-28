@@ -1,23 +1,13 @@
 #include "Tile.h"
 
-Tile::Tile(){
-	Icon = '!';
-}
+Tile::Tile(){Icon = '!';}
 
 Tile::~Tile(){}
 
-char Tile::get_icon(){
-	return Icon;
-}
+char Tile::get_icon(){return Icon;}
 
-void Tile::SetIcon(char _icon){
-	Icon = _icon;
-}
+void Tile::SetIcon(char _icon){Icon = _icon;}
 
-bool Tile::GetPassable(){
-	return Passable;
-}
+bool Tile::GetPassable(){return Passable;}
 
-void Tile::SetPassable(bool _b){
-	Passable = _b;
-}
+void Tile::SetPassable(bool _b){Passable = _b;}
