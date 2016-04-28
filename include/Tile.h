@@ -2,8 +2,7 @@
 #define TILE_H
 
 
-class Tile
-{
+class Tile{
 public:
 	Tile();
 	virtual ~Tile();
