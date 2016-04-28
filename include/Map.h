@@ -14,21 +14,21 @@
 using namespace std;
 
 class Map{
-	public:
-		Map(const string& _filename);
-		virtual ~Map();
+public:
+	Map(const string& _filename);
+	virtual ~Map();
 
-		bool LoadMapFile(const string& _filename);
-		Tile GetTile(int _x, int _y);
-		char GetTileIcon(int _x, int _y);
-		int GetTilemapW();
-		int GetTilemapH();
-		void test_make_char();
-		Char* test_get_char();
-		int NextTurn();
-	private:
-		vector<vector<Tile*> > m_tiles;
-		vector<Char*> m_vChars;
+	bool load_file(const string& _filename);
+	Tile get_tile(int _x, int _y);
+	char get_tile_icon(int _x, int _y);
+	int get_w();
+	int get_h();
+	void test_make_char();
+	Char* test_get_char();
+	int proc_turn();
+private:
+	vector<vector<Tile*>> m_tiles;
+	vector<Char*> m_chars;
 };
 
 #endif // MAP_H
