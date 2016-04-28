@@ -6,11 +6,9 @@
 
 class Tile_Wall : public Tile
 {
-	public:
-		Tile_Wall();
-		virtual ~Tile_Wall();
-	protected:
-	private:
+public:
+	Tile_Wall();
+	virtual ~Tile_Wall();
 };
 
 #endif // TILE_WALL_H
