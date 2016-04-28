@@ -4,16 +4,14 @@
 #include "Map.h"
 #include "Char.h"
 
-class Viewport
-{
-	public:
-		Viewport(int _y, int _x, int _h, int _w);
-		virtual ~Viewport();
+class Viewport{
+public:
+	Viewport(int _y, int _x, int _h, int _w);
+	virtual ~Viewport();
 
-		void Print(Map& _M, Char* _C);
-	protected:
-	private:
-	int X, Y, H, W;
+	void print(Map& _M, Char* _C);
+private:
+	int m_x, m_y, m_h, m_w;
 };
 
 #endif // VIEWPORT_H
