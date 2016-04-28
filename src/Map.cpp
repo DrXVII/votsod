@@ -41,7 +41,7 @@ Map::Map(const string& _filename)
 //TODO destroy m_tiles
 Map::~Map(){}
 
-bool Map::LoadMapFile(const string& _filename)
+bool Map::load_map(const string& _filename)
 {
 	/*TODO figure out what is throwing the 'illegal instruction' error in this
 	function and remove the duplicate logic from the consturctor.
@@ -83,7 +83,7 @@ bool Map::LoadMapFile(const string& _filename)
 	file.close();
 }
 
-Tile Map::GetTile(int _y, int _x)
+Tile Map::get_tile(int _y, int _x)
 {
 	if(_y < m_tiles.size() && _x < m_tiles[_y].size()){
 		return *m_tiles[_y][_x];
@@ -99,7 +99,7 @@ Tile Map::GetTile(int _y, int _x)
 	}
 }
 
-char Map::GetTileIcon(int _y, int _x)
+char Map::get_tile_icon(int _y, int _x)
 {
 	if(_y < m_tiles.size() && _x < m_tiles[_y].size()){
 		char ret = 0;
@@ -129,8 +129,9 @@ Char* Map::test_get_char()
 {
 	return m_vChars[0];
 }
+
 //TODO - consider moving such functionality into a System class
-int Map::NextTurn()
+int Map::start_turn()
 {
 	int ret = ' ';
 	for(int i = 0; i < m_vChars.size(); i++){
@@ -142,12 +143,12 @@ int Map::NextTurn()
 	return ret;
 }
 
-int Map::GetTilemapW()
+int Map::get_w()
 {
 	return m_tiles.size();
 }
 
-int Map::GetTilemapH()
+int Map::get_h()
 {
 	return m_tiles[0].size();
 }

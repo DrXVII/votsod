@@ -18,7 +18,7 @@ public:
 	Map(const string& _filename);
 	virtual ~Map();
 
-	bool load_file(const string& _filename);
+	bool load_map(const string& _filename);
 	Tile get_tile(int _x, int _y);
 	char get_tile_icon(int _x, int _y);
 	int get_w();

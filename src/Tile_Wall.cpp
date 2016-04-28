@@ -2,8 +2,8 @@
 
 Tile_Wall::Tile_Wall()
 {
-	SetIcon('#');
-	SetPassable(false);
+	set_icon('#');
+	set_is_passable(false);
 }
 
 Tile_Wall::~Tile_Wall(){}

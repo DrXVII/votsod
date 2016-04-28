@@ -28,7 +28,7 @@ implementing a screen buffer instead of several print passes.*/
 #include "Viewport.h"
 #include "System.h"
 
-using namespace std;
+using std::string;
 
 void start(int _cmd);
 void init_ncurses();//initialise ncurses mode and set initialisation params/funcs
@@ -46,26 +46,25 @@ int main()
 	wellcome();
 	start(cmd);
 	goodbye();
-	
+
 	endwin();//end ncurses mode
 	return 0;
 }
 
 void start(int _cmd)
 {
-	Map lMap("tstTxt");
-	System system;
+	Map map("tstTxt");
+	System gamesys;
 	//lMap.LoadMapFile("tstTxt");
-	lMap.test_make_char();
-	Viewport mainView(0, 0, 19, 61);
+	map.test_make_char();
+	Viewport main_view(0, 0, 19, 61);
 
 	while(_cmd != 'q'){
 		clear();
-		mainView.Print(lMap, lMap.test_get_char());
+		main_view.Print(map, map.test_get_char());
 		refresh();
 
-		//_cmd = lMap.NextTurn();
-		_cmd = system.startTurn(lMap);
+		_cmd = gamesys.start_turn(map);
 	}
 }
 

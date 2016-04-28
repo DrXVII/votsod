@@ -2,8 +2,8 @@
 
 Tile_Empty::Tile_Empty()
 {
-	SetIcon('.');
-	SetPassable(true);
+	set_icon('.');
+	set_ispassable(true);
 }
 
 Tile_Empty::~Tile_Empty(){}

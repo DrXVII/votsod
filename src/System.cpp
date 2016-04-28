@@ -6,7 +6,7 @@ System::System(){}
 
 System::~System(){}
 
-int System::startTurn(Map& _map)
+int System::start_turn(Map& _map)
 {
-	_map.NextTurn();
+	_map.start_turn();
 }

@@ -6,8 +6,8 @@ Tile::~Tile(){}
 
 char Tile::get_icon(){return Icon;}
 
-void Tile::SetIcon(char _icon){Icon = _icon;}
+void Tile::set_icon(char _icon){Icon = _icon;}
 
-bool Tile::GetPassable(){return Passable;}
+bool Tile::get_ispassable(){return m_ispassable;}
 
-void Tile::SetPassable(bool _b){Passable = _b;}
+void Tile::set_ispassable(bool _b){m_ispassable = _b;}
