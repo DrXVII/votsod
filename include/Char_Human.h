@@ -4,8 +4,7 @@
 #include <Char.h>
 
 
-class Char_Human : public Char
-{
+class Char_Human : public Char{
 public:
 	Char_Human(int _x, int _y);
 	virtual ~Char_Human();
