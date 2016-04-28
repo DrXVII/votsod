@@ -25,7 +25,7 @@ public:
 	int get_h();
 	void test_make_char();
 	Char* test_get_char();
-	int proc_turn();
+	int start_turn();
 private:
 	vector<vector<Tile*>> m_tiles;
 	vector<Char*> m_chars;
