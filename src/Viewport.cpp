@@ -8,8 +8,7 @@ Viewport::Viewport(int _y, int _x, int _h, int _w)
 	W = _w;
 }
 
-Viewport::~Viewport(){
-}
+Viewport::~Viewport(){}
 
 void Viewport::Print(Map& _M, Char* _C)
 {
