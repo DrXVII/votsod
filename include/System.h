@@ -4,12 +4,11 @@
 #include "Map.h"
 
 class System{
-
 public:
 	System();
 	~System();
 	
-	int startTurn(Map& _map);
+	int start_turn(Map& _map);
 private:
 };
 
