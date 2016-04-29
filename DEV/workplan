@@ -1,6 +1,7 @@
 === Objectives =================================================================
 - [x] Organise project repository
-- [x]Create an initial design for the engine core
+- [x] Create an initial design for the engine core
+- [x] Refactor and review old code
 - Flesh out engine core
 -- core mechanics
 -- basic AI/mobs
@@ -8,7 +9,7 @@
 -- line of sight
 
 === Steps ======================================================================
-# Organise project repository
+# [x] Organise project repository
 -----------------------------
 - [x] check and throw out the unnecessary doc files left over form asciiworld
 -- [x] text docs, ideas, etc
@@ -18,9 +19,15 @@
 -- [x] deicide on the repo structure
 -- [x] create a makefile
 
-# Create an initial design for the engine core
-----------------------------------------------
+# [x] Create an initial design for the engine core
+--------------------------------------------------
 - [x] create a basic dia diagram to have a visualisation and work from there
+
+# [x] Refactor and review old code
+------------------------------
+- [x] refactor code distribution to comply with K&R-Stroustrup style
+- [x] refactor naming to comply with K&R-Stroustrup style
+- [x] review the code and remember the old work and loose ends
 
 # Flesh out engine core
 -----------------------
@@ -28,7 +35,7 @@
 
 ## core mechanics
 - reintroduce wall collisions
--- create a System class to handle higher level processes of the program
+-- [x] create a System class to serve as higher level handler of procesess
 -- implement actor action handling in the Map class
 
 - refactor code. The current style is inconsistent and quite far from ISO.
