@@ -26,6 +26,7 @@ public:
 	void test_make_char();
 	Char* test_get_char();
 	int start_turn();
+	void move_actor(const int& _cmd, Char* _act);
 private:
 	vector<vector<Tile*>> m_tiles;
 	vector<Char*> m_chars;

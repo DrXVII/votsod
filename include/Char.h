@@ -11,7 +11,9 @@ public:
 	virtual char get_icon();
 	virtual int get_x();
 	virtual int get_y();
-
+	virtual void set_y(char _c);
+	virtual void set_x(char _c);
+	virtual void move(int _cmd);
 	virtual int take_turn() = 0;
 
 

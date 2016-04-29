@@ -1,5 +1,7 @@
 #include "Map.h"
 
+#include <string>
+
 Map::Map(const string& _filename)
 {
 	int ln_iter = -1; //iterator to iterate through the x while filling level
@@ -130,19 +132,6 @@ Char* Map::test_get_char()
 	return m_chars[0];
 }
 
-//TODO - consider moving such functionality into a System class
-int Map::start_turn()
-{
-	int ret = ' ';
-	for(int i = 0; i < m_chars.size(); i++){
-		ret = m_chars[i]->take_turn();
-		if(ret == 'q'){
-			return ret;
-		}
-	}
-	return ret;
-}
-
 int Map::get_w()
 {
 	return m_tiles.size();
@@ -152,3 +141,35 @@ int Map::get_h()
 {
 	return m_tiles[0].size();
 }
+
+int Map::start_turn()
+{
+	int ret = ' ';
+	for(int i = 0; i < m_chars.size(); i++){
+		ret = m_chars[i]->take_turn();
+		move_actor(ret, m_chars[i]);
+		if(ret == 'q'){
+			return ret;
+		}
+	}
+	return ret;
+}
+
+void Map::move_actor(const int& _cmd, Char* _act)
+{
+	int old_y = _act->get_y();
+	int old_x = _act->get_x();
+	
+	_act->move(_cmd);
+	
+	int new_y = _act->get_y();
+	int new_x = _act->get_x();
+	bool can_pass = m_tiles[new_y][new_x]->get_ispassable();
+	
+	if(!can_pass){
+		//if can't pass here - place the actor back
+		_act->set_y(old_y);
+		_act->set_x(old_x);
+	}
+}
+

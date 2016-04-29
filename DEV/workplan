@@ -33,25 +33,19 @@
 -----------------------
 (the idea is to make a reusable engine skeleton)
 
+- refactor code. The current style is inconsistent and quite far from ISO,
+	which suggests K&R
+
 ## core mechanics
 - reintroduce wall collisions
 -- [x] create a System class to serve as higher level handler of procesess
--- implement actor action handling in the Map class
-
-- refactor code. The current style is inconsistent and quite far from ISO.
+-- [x] implement actor movement handling in the Map class
 
 - implement treating of the main char as one of the char objects in the map
 	and render as such. (Throw away the hard-stamped '@' at middle of view-port
 	placeholder)
-	[salvaged old description]
-		- Create an array of char objects in the Map object
-		- place main char in the array
-		- reconfigure viewport accordingly
-					v	v	v
-		- later base the mob class inheritance off of the Character class
-		- then the main char and all the mobs and npc's would perform their turns as
-		system iterates through the array
-	[END]
+-- Char array in map should contain the main character as well
+-- reconfigure viewport accordingly
 
 ## basic AI/mobs
 - basic mobs

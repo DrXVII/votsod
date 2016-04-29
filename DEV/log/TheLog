@@ -95,3 +95,13 @@ Project time: 0d. 19:12:55
 [END OF SESSION] : 2016-04-27[01:00:00]Sunday
 Session time: 02:00:00
 Project time: 0d. 21:12:55
+[NEW SESSION] : 2016-04-29[18:51:25]Friday
+[20:33:06] Reintroduced wall collisions, completely remade this time.
+ - note to self though: sometimes there's less pain rewriting a small project
+than refactoring the code and trying to remember what was where. Especially
+when the code was abandoned with nothing even remotely tidied.
+ - allso: mothballing is a thing.
+[END OF SESSION] : 2016-04-29[20:39:09]Friday
+Session time: 01:47:44
+Project time: 0d. 23:00:39
+
