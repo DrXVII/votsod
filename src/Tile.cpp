@@ -1,12 +1,12 @@
 #include "Tile.h"
 
-Tile::Tile(){Icon = '!';}
+Tile::Tile(){m_icon = '!';}
 
 Tile::~Tile(){}
 
-char Tile::get_icon(){return Icon;}
+char Tile::get_icon(){return m_icon;}
 
-void Tile::set_icon(char _icon){Icon = _icon;}
+void Tile::set_icon(char _icon){m_icon = _icon;}
 
 bool Tile::get_ispassable(){return m_ispassable;}
 

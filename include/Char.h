@@ -15,7 +15,7 @@ public:
 	virtual int take_turn() = 0;
 
 
-private:
+protected:
 	char m_icon;
 	int m_x, m_y;
 };

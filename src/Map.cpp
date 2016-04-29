@@ -122,20 +122,20 @@ char Map::get_tile_icon(int _y, int _x)
 
 void Map::test_make_char()
 {
-	m_vChars.push_back(new Char_Human(40, 10));
+	m_chars.push_back(new Char_Human(40, 10));
 }
 
 Char* Map::test_get_char()
 {
-	return m_vChars[0];
+	return m_chars[0];
 }
 
 //TODO - consider moving such functionality into a System class
 int Map::start_turn()
 {
 	int ret = ' ';
-	for(int i = 0; i < m_vChars.size(); i++){
-		ret = m_vChars[i]->take_turn();
+	for(int i = 0; i < m_chars.size(); i++){
+		ret = m_chars[i]->take_turn();
 		if(ret == 'q'){
 			return ret;
 		}

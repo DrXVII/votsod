@@ -61,7 +61,7 @@ void start(int _cmd)
 
 	while(_cmd != 'q'){
 		clear();
-		main_view.Print(map, map.test_get_char());
+		main_view.print(map, map.test_get_char());
 		refresh();
 
 		_cmd = gamesys.start_turn(map);
