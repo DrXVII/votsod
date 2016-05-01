@@ -61,7 +61,7 @@ void start(int _cmd)
 
 	while(_cmd != 'q'){
 		clear();
-		main_view.print(map, map.test_get_char());
+		main_view.print(map, map.get_actr(0)); //actor 0 is our main character
 		refresh();
 
 		_cmd = gamesys.start_turn(map);

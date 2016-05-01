@@ -24,7 +24,8 @@ public:
 	int get_w();
 	int get_h();
 	void test_make_char();
-	Char* test_get_char();
+	Char* get_actr(const int& _i);
+	int get_actrcount();
 	int start_turn();
 	void move_actor(const int& _cmd, Char* _act);
 private:

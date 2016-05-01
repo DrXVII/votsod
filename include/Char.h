@@ -16,7 +16,6 @@ public:
 	virtual void move(int _cmd);
 	virtual int take_turn() = 0;
 
-
 protected:
 	char m_icon;
 	int m_x, m_y;

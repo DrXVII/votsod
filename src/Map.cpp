@@ -127,10 +127,9 @@ void Map::test_make_char()
 	m_chars.push_back(new Char_Human(40, 10));
 }
 
-Char* Map::test_get_char()
-{
-	return m_chars[0];
-}
+Char* Map::get_actr(const int& _i) {return m_chars[_i];}
+
+int Map::get_actrcount() {return m_chars.size();}
 
 int Map::get_w()
 {

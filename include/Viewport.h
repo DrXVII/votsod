@@ -11,7 +11,7 @@ public:
 
 	void print(Map& _M, Char* _C);
 private:
-	int m_x, m_y, m_h, m_w;
+	int m_x, m_y, m_h, m_w, m_centr_x, m_centr_y;
 };
 
 #endif // VIEWPORT_H
