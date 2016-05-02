@@ -20,7 +20,7 @@ Map::Map(const string& _filename)
 		if(!file.eof()){
 			m_tiles.push_back(v1);
 			ln_iter += 1;
-			for(int i = 0; i < line.size(); i++){
+			for(size_t i = 0; i < line.size(); i++){
 				switch(line[i]){
 				case '.':
 					m_tiles[ln_iter].push_back(new Tile_Empty);
@@ -65,7 +65,7 @@ bool Map::load_map(const string& _filename)
 		if(!file.eof()){
 			m_tiles.push_back(v1);
 			ln_iter += 1;
-			for(int i = 0; i < line.size(); i++){
+			for(size_t i = 0; i < line.size(); i++){
 				switch(line[i]){
 				case '.':
 					m_tiles[ln_iter].push_back(new Tile_Empty);
@@ -83,9 +83,10 @@ bool Map::load_map(const string& _filename)
 		}
 	}while(!file.eof());
 	file.close();
+	return 0;
 }
 
-Tile Map::get_tile(int _y, int _x)
+Tile Map::get_tile(unsigned int _y, unsigned int _x)
 {
 	if(_y < m_tiles.size() && _x < m_tiles[_y].size()){
 		return *m_tiles[_y][_x];
@@ -101,7 +102,7 @@ Tile Map::get_tile(int _y, int _x)
 	}
 }
 
-char Map::get_tile_icon(int _y, int _x)
+char Map::get_tile_icon(unsigned int _y, unsigned int _x)
 {
 	if(_y < m_tiles.size() && _x < m_tiles[_y].size()){
 		char ret = 0;
@@ -122,31 +123,48 @@ char Map::get_tile_icon(int _y, int _x)
 	}
 }
 
-void Map::test_make_char()
+void Map::add_actr(const string& _type, const int& _y, const int& _x)
 {
-	m_chars.push_back(new Char_Human(40, 10));
+	if(_type == "human"){
+		m_actors.push_back(new Actor_Human(_y, _x));
+	}
+	else if(_type == "watcher"){
+		m_actors.push_back(new Actor_Watcher(_y, _x));
+	}
+	else{
+		mvprintw(22, 0, "WARNING: Rquest for unexpected actor type");
+		getch();
+	}
 }
 
-Char* Map::get_actr(const int& _i) {return m_chars[_i];}
+Actor* Map::get_actr(const int& _i) {return m_actors[_i];}
 
-int Map::get_actrcount() {return m_chars.size();}
-
-int Map::get_w()
+Actor* Map::get_actr_atpos(const unsigned int& _y, const unsigned int _x,
+													 Actor*	_exclude)
 {
-	return m_tiles.size();
+	for(size_t i = 0; i < m_actors.size(); i++){
+		if(m_actors[i]->get_y() == _y && m_actors[i]->get_x() == _x
+			 && m_actors[i] != _exclude){
+			
+			return m_actors[i];
+		}
+	}
+	
+	return NULL;
 }
 
-int Map::get_h()
-{
-	return m_tiles[0].size();
-}
+int Map::get_actrcount() {return m_actors.size();}
+
+int Map::get_w() {return m_tiles.size();}
+
+int Map::get_h() {return m_tiles[0].size();}
 
 int Map::start_turn()
 {
 	int ret = ' ';
-	for(int i = 0; i < m_chars.size(); i++){
-		ret = m_chars[i]->take_turn();
-		move_actor(ret, m_chars[i]);
+	for(size_t i = 0; i < m_actors.size(); i++){
+		ret = m_actors[i]->take_turn();
+		move_actor(ret, m_actors[i]);
 		if(ret == 'q'){
 			return ret;
 		}
@@ -154,21 +172,30 @@ int Map::start_turn()
 	return ret;
 }
 
-void Map::move_actor(const int& _cmd, Char* _act)
+void Map::move_actor(const int& _cmd, Actor* _act)
 {
-	int old_y = _act->get_y();
-	int old_x = _act->get_x();
+	unsigned int old_y = _act->get_y();
+	unsigned int old_x = _act->get_x();
 	
 	_act->move(_cmd);
 	
-	int new_y = _act->get_y();
-	int new_x = _act->get_x();
+	unsigned int new_y = _act->get_y();
+	unsigned int new_x = _act->get_x();
 	bool can_pass = m_tiles[new_y][new_x]->get_ispassable();
+	bool tile_ocpd = (get_actr_atpos(new_y, new_x, _act) == NULL) ? false : true;
 	
 	if(!can_pass){
 		//if can't pass here - place the actor back
 		_act->set_y(old_y);
 		_act->set_x(old_x);
 	}
+	if(tile_ocpd){
+		//somebody(thing) is on the tile, place actor back
+		_act->set_y(old_y);
+		_act->set_x(old_x);
+		mvprintw(22, 0, "Tile occupied!");
+		refresh();
+		//and initiate combat
+		//... TODO replace with combat function call
+	}
 }
-

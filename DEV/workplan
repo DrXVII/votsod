@@ -1,16 +1,19 @@
 === Objectives =================================================================
+(to reach version 0.1)
 - [x] Organise project repository
 - [x] Create an initial design for the engine core
 - [x] Refactor and review old code
 - Flesh out engine core
--- core mechanics
+-- [x] housekeeping
+-- [x] core mechanics
 -- basic AI/mobs
+-- basic UI
 -- basic level generation
 -- line of sight
 
 === Steps ======================================================================
 # [x] Organise project repository
------------------------------
+---------------------------------
 - [x] check and throw out the unnecessary doc files left over form asciiworld
 -- [x] text docs, ideas, etc
 -- [x] xmind project maps
@@ -24,24 +27,23 @@
 - [x] create a basic dia diagram to have a visualisation and work from there
 
 # [x] Refactor and review old code
-------------------------------
+----------------------------------
 - [x] refactor code distribution to comply with K&R-Stroustrup style
 - [x] refactor naming to comply with K&R-Stroustrup style
 - [x] review the code and remember the old work and loose ends
 
 # [x] Flesh out engine core
------------------------
+---------------------------
 (the idea is to make a reusable engine skeleton)
 
 ## [x] housekeeping
 - [x] refactor code. The current style is inconsistent and quite far from ISO,
 	which suggests K&R
 
-## core mechanics
+## [x] core mechanics
 - [x] reintroduce wall collisions
 -- [x] create a System class to serve as higher level handler of procesess
 -- [x] implement actor movement handling in the Map class
-
 - [x] implement treating of the main char as one of the char objects in the map
 	and render as such. (Throw away the hard-stamped '@' at middle of view-port
 	placeholder)
@@ -50,8 +52,11 @@
 
 ## basic AI/mobs
 - basic mobs
--- introduce an AI-less mob (let's consider it a training dummy :D )
+-- [x] introduce an AI-less mob (let's consider it a training dummy :D )
 -- implement basic mob AI (only homing for now)
+
+## basic UI
+- ability to check stats (suggestion: map to 'c')
 
 ## basic level generation
 - generate a random level (for now some generic rooms connected with corridors)
@@ -63,21 +68,3 @@
 -- mob AI behaviour
 
 === Ideas ======================================================================
-# Core Engine mechanics
------------------------
-- Levels of illumination
--- Calculate per tile
--- Effects on line of sight
--- Illuminating with objects (sconces, carried torches or other equipment)
-
-- Flowing fluids.
-
-# Gameplay
-----------
-- The player will have the ability to enter a person's inner world at certain
-	circumstances. Each world will have a certain flavour depending on the
-	main principality/inhabitants. Each world will be unique as it will be
-	randomly generated each time in accordance to the prevalent theme of the
-	level.
-
-- outdoor environments

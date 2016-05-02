@@ -1,16 +1,16 @@
-#ifndef CHAR_H
-#define CHAR_H
+#ifndef ACTOR_H
+#define ACTOR_H
 
 #include <ncurses.h>
 
-class Char{
+class Actor{
 public:
-	Char(int _x, int _y);
-	virtual ~Char();
+	Actor(const int& _y, const int& _x);
+	virtual ~Actor();
 
 	virtual char get_icon();
-	virtual int get_x();
-	virtual int get_y();
+	virtual unsigned int get_x();
+	virtual unsigned int get_y();
 	virtual void set_y(char _c);
 	virtual void set_x(char _c);
 	virtual void move(int _cmd);
@@ -18,7 +18,7 @@ public:
 
 protected:
 	char m_icon;
-	int m_x, m_y;
+	unsigned int m_x, m_y;
 };
 
 #endif // CHAR_H

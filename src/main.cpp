@@ -6,16 +6,11 @@
  *******************************************************************************
 */
 
-//TODO implement actor moving/handling @ Map.NextTurn
-//TODO refactor code to conform to sanity and consistant style
 /*TODO store map objects and actors in a "list" array (vector's gonna get slow
  * here)*/
-/*TODO - think on a more elegant viewport solution, consider placing the main
-character into the character array of a map object. Then viewport would work
-differently, and more elegantly.*/
 /*TODO - due to different arrays containing items to be seen, consider
 implementing a screen buffer instead of several print passes.*/
-//TODO - destructors for classes storing objects in the heap
+//TODO - destructors for classes storing objects in the heap (e.g. Map class)
 
 //core libraries
 #include <string>
@@ -24,7 +19,7 @@ implementing a screen buffer instead of several print passes.*/
 #include <ncurses.h>
 //proprietary classes,classes
 #include "Map.h"
-#include "Char.h"
+#include "Actor.h"
 #include "Viewport.h"
 #include "System.h"
 
@@ -36,7 +31,7 @@ void print_cen(int _ln, string _s);//prints _s centered on line _ln
 void wellcome();
 void goodbye();
 
-string gmVer = "v0.0.20a || 2015-10-24[15:15:55]Saturday";
+string gmVer = "v0.0.3 || 2016-5-02[22:45:00]Monday";
 
 int main()
 {
@@ -55,8 +50,9 @@ void start(int _cmd)
 {
 	Map map("tstTxt");
 	System gamesys;
-	//lMap.LoadMapFile("tstTxt");
-	map.test_make_char();
+	//lMap.LoadMapFile("tstTxt"); throws an error for reasons unresolved
+	map.add_actr("human", 10, 40);
+	map.add_actr("watcher", 10, 38);
 	Viewport main_view(0, 0, 19, 61);
 
 	while(_cmd != 'q'){

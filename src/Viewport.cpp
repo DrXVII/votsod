@@ -12,7 +12,7 @@ Viewport::Viewport(int _y, int _x, int _h, int _w)
 
 Viewport::~Viewport(){}
 
-void Viewport::print(Map& _m, Char* _c)
+void Viewport::print(Map& _m, Actor* _c)
 {
 	int camcenter_y = _c->get_y();
 	int camcenter_x = _c->get_x();
@@ -31,7 +31,7 @@ void Viewport::print(Map& _m, Char* _c)
 		
 		if(std::abs(actdist_y) < (m_h / 2) && std::abs(actdist_x) < (m_w / 2)){
 			char act_icon = _m.get_actr(i)->get_icon();
-			mvaddch(m_centr_y + actdist_y, m_centr_x + actdist_x, _c->get_icon());
+			mvaddch(m_centr_y + actdist_y, m_centr_x + actdist_x, act_icon);
 		}
 	}
 }

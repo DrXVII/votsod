@@ -1,16 +1,13 @@
-#include "Char_Human.h"
+#include "Actor_Human.h"
 
-Char_Human::Char_Human(int _x, int _y): Char(_x, _y)
+Actor_Human::Actor_Human(int _x, int _y): Actor(_x, _y)
 {
 	m_icon = '@';
 }
 
-Char_Human::~Char_Human()
-{
-	//dtor
-}
+Actor_Human::~Actor_Human() {}
 
-int Char_Human::take_turn()
+int Actor_Human::take_turn()
 {
 	int cmd = ' ';
 	do{

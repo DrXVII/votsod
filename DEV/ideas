@@ -1,0 +1,23 @@
+=== Ideas ======================================================================
+# Gameplay mechanics
+-----------------------
+- Levels of illumination
+-- Calculate per tile
+-- Effects on line of sight
+-- Illuminating with objects (sconces, carried torches or other equipment)
+
+- Flowing fluids.
+- outdoor environments
+- tiles passable only for actors with certain gear/effect/abiltiy
+- perception based on senses like sight, smell, hearing and additional uncommon or supernatural senses granted as innate abilities of mobs or as a buff to the player by some unconventional means
+- locales with caves/areas that seem as a (multilevel) map by themselves, but stay persistent until locale is forgotten.
+
+# Gameplay
+----------
+- The player will have the ability to enter a person's inner world at certain
+	circumstances. Each world will have a certain flavour depending on the
+	main principality/inhabitants. Each world will be unique as it will be
+	randomly generated each time in accordance to the prevalent theme of the
+	level.
+- In the levels, some rooms/areas could have special effects, events, purpose...
+- Maybe have more than 2 planes of existence and/or pocket dimensions

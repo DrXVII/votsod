@@ -2,7 +2,7 @@ comp = g++
 compOpt = -c -Wall -std=c++11 -I $(hDir)
 libs = -lncurses
 obj = main.o \
-	Char.o Char_Human.o \
+	Actor.o Actor_Human.o Actor_Watcher.o \
 	Map.o \
 	Tile.o Tile_Empty.o Tile_Wall.o \
 	Viewport.o System.o

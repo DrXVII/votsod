@@ -1,0 +1,38 @@
+version 0.1
+-----------
+- [x] Support for maps larger than the screen (camera moves with the player)
+- [x] At least one type of mob
+- Simple "homming" mob AI
+- Basic UI (in the form of view charsheet (button 'c'))
+- Random level generation: one randomly generated map
+- Line of sight for the player (altered by obstructions)
+- simpe (only DMG based) combat
+
+verion 0.2
+----------
+- improved UI: most important stats visible on the main screen sidebar
+- mob AI line of sight (common default value for now)
+- A* pathfinding for AI
+- combat: add skills to combat calculations: think of dodging, to hit chance, toughness
+- combat: calculations influenced by RNG
+- combat: add crit fail and crit success
+
+----------------------
+other planned features
+----------------------
+(in a rough and boud to change order of priority)
+- levels of randomly generated maps connected by i.e. staircases
+- doors
+- projectile weapons
+- projectile mobs
+- wearables
+- consumables
+- weildables
+- traps
+- disarming traps (think of more activities affected by skill + RNG)
+- flying mobs
+- maps generated in a theme conformant fashion depending on locale
+- open(ish) world
+- two interwoven dimensions (one affects the other in some way)
+- basic perception mechanics for player and mobs
+- rooms with specific effects, events, purpose, etc...

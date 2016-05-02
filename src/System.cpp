@@ -8,5 +8,5 @@ System::~System(){}
 
 int System::start_turn(Map& _map)
 {
-	_map.start_turn();
+	return _map.start_turn();
 }
