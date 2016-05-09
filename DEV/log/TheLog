@@ -95,6 +95,7 @@ Project time: 0d. 19:12:55
 [END OF SESSION] : 2016-04-27[01:00:00]Sunday
 Session time: 02:00:00
 Project time: 0d. 21:12:55
+
 [NEW SESSION] : 2016-04-29[18:51:25]Friday
 [20:33:06] Reintroduced wall collisions, completely remade this time.
  - note to self though: sometimes there's less pain rewriting a small project
@@ -104,4 +105,23 @@ when the code was abandoned with nothing even remotely tidied.
 [END OF SESSION] : 2016-04-29[20:39:09]Friday
 Session time: 01:47:44
 Project time: 0d. 23:00:39
+
+[NEW SESSION] : 2016-05-02[23:03:02]Monday
+[23:03:05] Spent about 4h today
+- fixed quite a few iffy parts of code
+- silenced all compiler warnings
+- made the first mob! The "watcher"... he is currently quite dull though, as he 
+has no  AI implemented yet. But that will be quite enough to train on when a bas
+ic combat systemwill take shape.
+- allso implemented mob-related player movement and collision handling.
+- we're ready and rearin to go towards combat and AI!
+[END OF SESSION] : 2016-05-02[23:08:42]Monday
+Session time: 04:05:40
+Project time: 0d. 23:06:19
+
+[NEW SESSION] : 2016-05-02[23:11:24]Monday
+[23:11:27] Updated project time (have to find time to update prolog :D )
+[END OF SESSION] : 2016-05-02[23:12:10]Monday
+Session time: 00:00:46
+Project time: 1d. 03:07:05
 

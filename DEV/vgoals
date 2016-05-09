@@ -2,15 +2,15 @@ version 0.1
 -----------
 - [x] Support for maps larger than the screen (camera moves with the player)
 - [x] At least one type of mob
-- Simple "homming" mob AI
-- Basic UI (in the form of view charsheet (button 'c'))
+- [x] Simple "homming" mob AI
+- [x] basic UI: most important stats visible on the main screen sidebar (hp)
 - Random level generation: one randomly generated map
 - Line of sight for the player (altered by obstructions)
-- simpe (only DMG based) combat
+- [x] simpe (only DMG based) combat
 
 verion 0.2
 ----------
-- improved UI: most important stats visible on the main screen sidebar
+- improved UI: (in the form of view charsheet (button 'c'))
 - mob AI line of sight (common default value for now)
 - A* pathfinding for AI
 - combat: add skills to combat calculations: think of dodging, to hit chance, toughness

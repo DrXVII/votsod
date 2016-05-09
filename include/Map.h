@@ -31,6 +31,8 @@ public:
 	int get_actrcount();
 	int start_turn();
 	void move_actor(const int& _cmd, Actor* _act);
+	void atk(Actor* _att, Actor* _def);
+	void remdead();
 private:
 	vector<vector<Tile*>> m_tiles;
 	vector<Actor*> m_actors;

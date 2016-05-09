@@ -161,15 +161,26 @@ int Map::get_h() {return m_tiles[0].size();}
 
 int Map::start_turn()
 {
-	int ret = ' ';
+	int cmd = ' ';
 	for(size_t i = 0; i < m_actors.size(); i++){
-		ret = m_actors[i]->take_turn();
-		move_actor(ret, m_actors[i]);
-		if(ret == 'q'){
-			return ret;
+		if(m_actors[i]->get_controller() == "HUMAN"){
+			cmd = m_actors[i]->take_turn();
+		}
+		else if(m_actors[i]->get_controller() == "AI_HOMMING"){
+			cmd = m_actors[i]->ai_homming(m_actors[0]->get_y(), m_actors[0]->get_x());
+		}
+		else{
+			mvprintw(23, 0, "ERROR: Unimplemented controller requested!");
+			getch();
+			return -1;
+		}
+		
+		move_actor(cmd, m_actors[i]);
+		if(cmd == 'q'){
+			return cmd;
 		}
 	}
-	return ret;
+	return cmd;
 }
 
 void Map::move_actor(const int& _cmd, Actor* _act)
@@ -182,20 +193,43 @@ void Map::move_actor(const int& _cmd, Actor* _act)
 	unsigned int new_y = _act->get_y();
 	unsigned int new_x = _act->get_x();
 	bool can_pass = m_tiles[new_y][new_x]->get_ispassable();
-	bool tile_ocpd = (get_actr_atpos(new_y, new_x, _act) == NULL) ? false : true;
+	Actor* target = get_actr_atpos(new_y, new_x, _act);
 	
 	if(!can_pass){
 		//if can't pass here - place the actor back
 		_act->set_y(old_y);
 		_act->set_x(old_x);
 	}
-	if(tile_ocpd){
+	if(target != NULL){
 		//somebody(thing) is on the tile, place actor back
 		_act->set_y(old_y);
 		_act->set_x(old_x);
 		mvprintw(22, 0, "Tile occupied!");
 		refresh();
 		//and initiate combat
-		//... TODO replace with combat function call
+		atk(_act, target);
+		remdead();
+	}
+}
+
+void Map::atk(Actor* _att, Actor* _def)
+{
+	_def->take_dmg(_att->deal_dmg());
+}
+
+void Map::remdead()
+{
+	/*TODO consider storing the m_actors array iterator in actor object as m_ID
+	 * in order to access actors more efficiently for operations as this */
+	
+	//if the hero is dead ( actor(0) ),- end game
+	if(m_actors[0]->get_hp() <= 0){
+		return;
+	}
+	
+	for(size_t i = 1; i < m_actors.size(); i++){
+		if(m_actors[i]->get_hp() <= 0){
+			m_actors.erase(m_actors.begin() + i);
+		}
 	}
 }
