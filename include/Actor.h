@@ -3,6 +3,14 @@
 
 #include <ncurses.h>
 #include <string>
+#include <vector>
+
+#include "Tile.h"
+
+using std::string;
+using std::vector;
+
+//class Tile;
 
 class Actor{
 public:
@@ -13,17 +21,18 @@ public:
 	virtual unsigned int get_x();
 	virtual unsigned int get_y();
 	virtual int get_hp();
-	virtual std::string get_controller();
+	virtual string get_controller();
 	virtual void set_y(char _c);
 	virtual void set_x(char _c);
 	virtual void move(int _cmd);
-	virtual int take_turn() = 0;
 	virtual int deal_dmg();
 	virtual void take_dmg(int _pts);
 	virtual int ai_homming(const unsigned int& _y, const unsigned int& _x);
+	virtual int take_turn() = 0;
+	virtual int take_turn2(const vector<vector<Tile*>>& _tiles) = 0;
 
 protected:
-	std::string m_controller;
+	string m_controller;
 	char m_icon;
 	unsigned int m_x, m_y;
 	int m_hp;

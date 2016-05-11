@@ -12,7 +12,10 @@
 #include "Actor_Human.h"
 #include "Actor_Watcher.h"
 
-using namespace std;
+using std::vector;
+using std::string;
+using std::fstream;
+using std::to_string;
 
 class Map{
 public:

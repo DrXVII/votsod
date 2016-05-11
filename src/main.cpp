@@ -32,7 +32,7 @@ void wellcome();
 void endgame();
 void goodbye();
 
-string gmVer = "v0.0.3 || 2016-5-02[22:45:00]Monday";
+string gmVer = "v0.0.4 || 2016-5-09[21:55:00]Monday";
 
 int main()
 {

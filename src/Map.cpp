@@ -161,10 +161,10 @@ int Map::get_h() {return m_tiles[0].size();}
 
 int Map::start_turn()
 {
-	int cmd = ' ';
+	int cmd = 0;
 	for(size_t i = 0; i < m_actors.size(); i++){
 		if(m_actors[i]->get_controller() == "HUMAN"){
-			cmd = m_actors[i]->take_turn();
+			cmd = m_actors[i]->take_turn2(m_tiles);
 		}
 		else if(m_actors[i]->get_controller() == "AI_HOMMING"){
 			cmd = m_actors[i]->ai_homming(m_actors[0]->get_y(), m_actors[0]->get_x());
@@ -175,7 +175,7 @@ int Map::start_turn()
 			return -1;
 		}
 		
-		move_actor(cmd, m_actors[i]);
+		//move_actor(cmd, m_actors[i]); TODO - moving the logic to Actor class
 		if(cmd == 'q'){
 			return cmd;
 		}

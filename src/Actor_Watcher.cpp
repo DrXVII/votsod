@@ -12,3 +12,5 @@ Actor_Watcher::Actor_Watcher(int _y, int _x): Actor(_y, _x)
 Actor_Watcher::~Actor_Watcher() {}
 
 int Actor_Watcher::take_turn() {return 0;}
+
+int Actor_Watcher::take_turn2(const vector<vector<Tile*>>& _tiles) {return 0;}

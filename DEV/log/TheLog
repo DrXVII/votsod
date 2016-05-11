@@ -125,3 +125,23 @@ Project time: 0d. 23:06:19
 Session time: 00:00:46
 Project time: 1d. 03:07:05
 
+[NEW SESSION] : 2016-05-09[22:15:57]Monday
+[22:16:01] combat an AI
+- there are finally mobs capable of fighting (and killing) the hero
+- allso, found time to add functionality to prolog and will ad 3h, which I spent
+creating the AI and combat. The AI is pretty basic for now, just homming to the
+hero's coordinates... But it's PROGRESS! especially after a week of absence...
+- SO were redy to go to level generation and then line of sight.
+[END OF SESSION] : 2016-05-09[22:20:17]Monday
+Session time: 03:04:20
+Project time: 1d. 06:11:25
+
+[NEW SESSION] : 2016-05-11[07:15:33]Wednesday
+[07:16:03] Figured out how to move the AI and player movement handling into
+the Actor class without it conflicting with the declarations made in Map.
+[07:55:53] partially moved player movement logic to Actor class
+will continue with that tomorrow and then move the AI logic there aswell.
+[END OF SESSION] : 2016-05-11[07:57:32]Wednesday
+Session time: 01:26:59
+Project time: 1d. 07:38:24
+
