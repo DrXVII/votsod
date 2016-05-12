@@ -1,4 +1,6 @@
 2016-05-09
+- make the movement functionality a separate module within the Actor class
+to be called by either player input or the different AI's.
 - move the UI rendering functionality to System
 - As the AI will receive world data references form Map, consider providing
 human player controll functions with such data to internalise Actor logic.

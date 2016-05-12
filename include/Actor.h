@@ -27,9 +27,11 @@ public:
 	virtual void move(int _cmd);
 	virtual int deal_dmg();
 	virtual void take_dmg(int _pts);
-	virtual int ai_homming(const unsigned int& _y, const unsigned int& _x);
+	virtual int ai_homming(const vector<vector<Tile*>>& _tiles,
+												 Actor* _tgt);
 	virtual int take_turn() = 0;
-	virtual int take_turn2(const vector<vector<Tile*>>& _tiles) = 0;
+	virtual int take_turn2(const vector<vector<Tile*>>& _tiles,
+												 vector<Actor*>& _actors) = 0;
 
 protected:
 	string m_controller;

@@ -56,11 +56,15 @@ void Actor::take_dmg(int _pts)
 	}
 }
 
-int Actor::ai_homming(const unsigned int& _y, const unsigned int& _x)
+int Actor::ai_homming(const vector<vector<Tile*>>& _tiles,
+												 Actor* _tgt)
 {
-	if(m_y > _y) {return '8';}
-	else if(m_y < _y) {return '2';}
-	else if(m_x > _x) {return '4';}
-	else if(m_x < _x) {return '6';}
+	unsigned int tgt_y = _tgt->get_y();
+	unsigned int tgt_x = _tgt->get_x();
+	
+	if(m_y > tgt_y) {return '8';}
+	else if(m_y < tgt_y) {return '2';}
+	else if(m_x > tgt_x) {return '4';}
+	else if(m_x < tgt_x) {return '6';}
 	else {return '5';}
 }

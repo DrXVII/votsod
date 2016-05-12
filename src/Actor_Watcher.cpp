@@ -13,4 +13,6 @@ Actor_Watcher::~Actor_Watcher() {}
 
 int Actor_Watcher::take_turn() {return 0;}
 
-int Actor_Watcher::take_turn2(const vector<vector<Tile*>>& _tiles) {return 0;}
+int Actor_Watcher::take_turn2(const vector<vector<Tile*>>& _tiles,
+															vector<Actor*>& _actors)
+{return 0;}

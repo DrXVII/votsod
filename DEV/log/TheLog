@@ -145,3 +145,14 @@ will continue with that tomorrow and then move the AI logic there aswell.
 Session time: 01:26:59
 Project time: 1d. 07:38:24
 
+[NEW SESSION] : 2016-05-12[07:56:15]Thursday
+[07:56:16] Moved the actor movement handling functionality into the Actor class
+and started with moving the AI. Next time should work on placing the movement
+functionality into a separate module to be used both by player input and by
+the different AIs, then finalise AI integration with the new modular structure.
+[08:00:19] Spent around 1h30m in total today. Time to make breakfast and go to
+work :)
+[END OF SESSION] : 2016-05-12[08:01:01]Thursday
+Session time: 01:34:46
+Project time: 1d. 09:13:10
+
