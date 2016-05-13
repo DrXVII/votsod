@@ -23,21 +23,42 @@ void Actor::set_y(char _c) {m_y = _c;};
 
 void Actor::set_x(char _c) {m_x = _c;};
 
-void Actor::move(int _cmd)
+int Actor::move_ai(int _cmd,
+									 const vector<vector<Tile*>>& _tiles,
+									 vector<Actor*>& _actors)
 {
+	unsigned int new_y;
+	unsigned int new_x;
+	
+	new_y = m_y;
+	new_x = m_x;
+	
 	switch(_cmd){
-		case '8':
-			m_y--; break;
-		case '2':
-			m_y++; break;
-		case '4':
-			m_x--; break;
-		case '6':
-			m_x++; break;
-		case '5':
-			//stay in place
-			break;
+		case '8': new_y--; break;
+		case '2': new_y++; break;
+		case '4': new_x--; break;
+		case '6': new_x++; break;
+		case '5': break; //stay in place
 	}
+	
+	// see if destination tile is occupied
+	for(size_t i = 0; i < _actors.size(); i++){
+		if(_actors[i]->get_y() == new_y && _actors[i]->get_x() == new_x
+			&& _actors[i] != this){
+			// tile is occupied - can not move there, attacking occupant
+			_actors[i]->take_dmg(deal_dmg());
+			return 0;
+		}
+	}
+	
+	bool can_pass = _tiles[new_y][new_x]->get_ispassable();
+	if(can_pass){ //don't skip turn if impassable (at least for now[2016-05-11])
+		m_y = new_y;
+		m_x = new_x;
+		return 0;
+	}
+	
+	return 1; //indicates, that the turn has not been spent yet (did nothing)
 }
 
 int Actor::deal_dmg()
@@ -57,14 +78,19 @@ void Actor::take_dmg(int _pts)
 }
 
 int Actor::ai_homming(const vector<vector<Tile*>>& _tiles,
-												 Actor* _tgt)
+												 vector<Actor*>& _actors)
 {
-	unsigned int tgt_y = _tgt->get_y();
-	unsigned int tgt_x = _tgt->get_x();
+	int trnsleft = 1; // 0 - turn spent
+	unsigned int tgt_y = _actors[0]->get_y();
+	unsigned int tgt_x = _actors[0]->get_x();
 	
-	if(m_y > tgt_y) {return '8';}
-	else if(m_y < tgt_y) {return '2';}
-	else if(m_x > tgt_x) {return '4';}
-	else if(m_x < tgt_x) {return '6';}
-	else {return '5';}
+	do{
+		if(m_y > tgt_y) {trnsleft = move_ai('8', _tiles, _actors);}
+		if(m_y < tgt_y) {trnsleft = move_ai('2', _tiles, _actors);}
+		if(m_x > tgt_x && trnsleft > 0) {trnsleft = move_ai('4', _tiles, _actors);}
+		if(m_x < tgt_x && trnsleft > 0) {trnsleft = move_ai('6', _tiles, _actors);}
+		if(trnsleft > 0) {trnsleft = move_ai('5', _tiles, _actors);}
+		trnsleft = 0;
+	}while(trnsleft == 1);
+	return 0;
 }

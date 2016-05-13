@@ -20,9 +20,8 @@ using std::to_string;
 class Map{
 public:
 	Map(const string& _filename);
-	virtual ~Map();
+	~Map();
 
-	bool load_map(const string& _filename);
 	Tile get_tile(unsigned int _x, unsigned int _y);
 	char get_tile_icon(unsigned int _x, unsigned int _y);
 	int get_w();

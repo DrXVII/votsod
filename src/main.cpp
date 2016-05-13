@@ -26,13 +26,12 @@ implementing a screen buffer instead of several print passes.*/
 using std::string;
 
 void start(int _cmd);
+void render_mainw();// print the main game window
 void init_ncurses();//initialise ncurses mode and set initialisation params/funcs
-void print_cen(int _ln, const string& _s);//prints _s centered on line _ln
 void wellcome();
 void endgame();
 void goodbye();
-
-string gmVer = "v0.0.4 || 2016-5-09[21:55:00]Monday";
+void print_cen(int _ln, const string& _s);//prints _s centered on line _ln
 
 int main()
 {
@@ -49,41 +48,28 @@ int main()
 
 void start(int _cmd)
 {
-	Map map("tstTxt");
 	System gamesys;
-	//lMap.LoadMapFile("tstTxt"); !!! throws an error for reasons unresolved
-	Viewport main_view(0, 0, 19, 61);
+	gamesys.init();
 	
-	map.add_actr("human", 10, 40);
-	map.add_actr("watcher", 10, 38);
-	map.add_actr("watcher", 18, 58);
-	map.add_actr("watcher", 14, 73);
-	map.add_actr("watcher", 3, 42);
-	map.add_actr("watcher", 55, 20);
-	map.add_actr("watcher", 55, 40);
-	map.add_actr("watcher", 39, 14);
-	map.add_actr("watcher", 18, 7);
+	gamesys.add_actr("human", 10, 40);
+	gamesys.add_actr("watcher", 10, 38);
+	gamesys.add_actr("watcher", 18, 58);
+	gamesys.add_actr("watcher", 14, 73);
+	gamesys.add_actr("watcher", 3, 42);
+	gamesys.add_actr("watcher", 55, 20);
+	gamesys.add_actr("watcher", 55, 40);
+	gamesys.add_actr("watcher", 39, 14);
+	gamesys.add_actr("watcher", 18, 7);
 
 	while(_cmd != 'q'){
-		/* TODO the folowing should be moved to System.renderui() */
-		string sbuf;
+		gamesys.render_mainw();
 		
-		clear();
-		main_view.print(map, map.get_actr(0)); //actor 0 is our main character
-		sbuf = "HP: " + to_string(map.get_actr(0)->get_hp());
-		mvprintw(0, 63, sbuf.c_str());
-		sbuf = "DEBUG: x: " + to_string(map.get_actr(0)->get_x());
-		sbuf = sbuf + " y:" + to_string(map.get_actr(0)->get_y());
-		mvprintw(23, 0, sbuf.c_str());
-		refresh();
-		// END of UI segment
-		
-		if(map.get_actr(0)->get_hp() <= 0){
+		if(gamesys.get_herohp() <= 0){
 			endgame();
 			break;
 		}
 
-		_cmd = gamesys.start_turn(map);
+		_cmd = gamesys.start_turn();
 		if(_cmd == -1){
 			break;
 		}
@@ -102,6 +88,8 @@ void init_ncurses()
 
 void wellcome()
 {
+	string gmVer = "build: v0.00.5 || 2016-5-13[22:52:00]Friday";
+	
 	print_cen(8, "Hello everyone.");
 	print_cen(10, "Welcome to ASCIIWORLD!");
 	print_cen(12, "I do hope you will enjoy your visit.");

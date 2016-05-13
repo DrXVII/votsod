@@ -24,11 +24,13 @@ public:
 	virtual string get_controller();
 	virtual void set_y(char _c);
 	virtual void set_x(char _c);
-	virtual void move(int _cmd);
+	virtual int move_ai(int _cmd,
+											const vector<vector<Tile*>>& _tiles,
+											vector<Actor*>& _actors);
 	virtual int deal_dmg();
 	virtual void take_dmg(int _pts);
 	virtual int ai_homming(const vector<vector<Tile*>>& _tiles,
-												 Actor* _tgt);
+												 vector<Actor*>& _actors);
 	virtual int take_turn() = 0;
 	virtual int take_turn2(const vector<vector<Tile*>>& _tiles,
 												 vector<Actor*>& _actors) = 0;

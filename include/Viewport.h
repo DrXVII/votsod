@@ -9,7 +9,7 @@ public:
 	Viewport(int _y, int _x, int _h, int _w);
 	virtual ~Viewport();
 
-	void print(Map& _M, Actor* _C);
+	void print(Map* _m, Actor* _c);
 private:
 	int m_x, m_y, m_h, m_w, m_centr_x, m_centr_y;
 };

@@ -43,7 +43,6 @@ int Actor_Human::take_turn2(const vector<vector<Tile*>>& _tiles,
 	int cmd = 0;
 	unsigned int new_y;
 	unsigned int new_x;
-	bool ndoftrn = false;
 	
 	do{
 		new_y = m_y;
@@ -61,24 +60,23 @@ int Actor_Human::take_turn2(const vector<vector<Tile*>>& _tiles,
 			case 'q': return cmd;
 		}
 		
-		bool can_pass = _tiles[new_y][new_x]->get_ispassable();
 		// see if destination tile is occupied
 		for(size_t i = 0; i < _actors.size(); i++){
 			if(_actors[i]->get_y() == new_y && _actors[i]->get_x() == new_x
 				&& _actors[i] != this){
 				// tile is occupied - can not move there, attacking occupant
-				can_pass = false;
 				_actors[i]->take_dmg(deal_dmg());
-				ndoftrn = true;
+				return 0;
 			}
 		}
 		
-		if(can_pass && !ndoftrn){ //don't skip turn if impassable (at least for now[2016-05-11])
+		bool can_pass = _tiles[new_y][new_x]->get_ispassable();
+		if(can_pass){ //don't skip turn if impassable (at least for now[2016-05-11])
 			m_y = new_y;
 			m_x = new_x;
-			ndoftrn = true;
+			return 0;
 		}
-	}while(cmd != 'q' && !ndoftrn);
+	}while(cmd != 'q');
 	
 	return 0;
 }

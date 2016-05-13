@@ -15,4 +15,4 @@ int Actor_Watcher::take_turn() {return 0;}
 
 int Actor_Watcher::take_turn2(const vector<vector<Tile*>>& _tiles,
 															vector<Actor*>& _actors)
-{return 0;}
+{return ai_homming(_tiles, _actors);}
