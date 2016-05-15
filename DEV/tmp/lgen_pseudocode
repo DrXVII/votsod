@@ -1,0 +1,41 @@
+// returns a random number between min and max inclusive
+get_rand(int _min, int _max){};
+
+generate_room(){
+	loopitr = 0;
+	while(loopitr < room_amt){
+		room_mid_x = get_rand(0, 100);
+		room_mid_y = get_rand(0, 100);
+		room_h = get_rand(2,10);
+		room_w = get_rand(2, 10);
+		place_room(){};
+
+		loopitr++;
+	}
+}
+
+generate_corridor(){
+	room_amt = get_rand(10, 20);
+
+	generate_room();
+
+
+	loopitr = 0;
+	while(loopitr < room_amt){
+		start_room = random deicision on which room to start from();
+		corr_l = get_rand(1, 10);
+		corr_dir = get_rand(0, 3);
+
+		extend_corr_from_room(corr_l, corr_dir, start_room);
+		if(get_rand(0,1)){ // P(1/2)
+			extend corridor from end of corridor();
+		}
+		else{
+			if(get_rand(0, 9){ // P(1/10)
+				generate room at end of corridor();
+			}
+		}
+
+	loopitr++;
+	}
+}

@@ -27,7 +27,21 @@ above them. Also possibly a few lower tiers to distinguish between the pawns.
 As the "tier I" "tier II" seems rather dull and even unrepresentative of 
 the gameworld.
 
+- GAMEPLAY IDEA : MAGIC
+When casting a spell the caster could select how much energy to put into
+the spell which would affect the otput of the given spell.
+Eg: spirit cannon - amt of pwr would affect range, explosion damage and radius,
+from a certain point the pufs of smoke would have a chance of dealing damage to
+creatures passing through them.
+
 - SPELL IDEA
 [SUMMON SWORDS](think of a better name)
 The caster summons several flying swords in a certain area (or within a
 certain perimeter around the target) which homm in on the targer to pierce it.
+
+- SPELL IDEA
+[SPIRIT CANNON]
+The caster hurls a very quickly moving projectile at the target. The projectile
+explodes upon impact inflicting the bulk of the damage to the target, and some
+to the surrounding area (short radius). A few pufs of "magic" smoke are
+generated in the immediate vicinity.

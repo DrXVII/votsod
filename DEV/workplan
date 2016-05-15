@@ -1,15 +1,15 @@
 === Objectives =================================================================
-(to reach version 0.1)
+(to reach version 0.01.0)
 - [x] Organise project repository
 - [x] Create an initial design for the engine core
 - [x] Refactor and review old code
 - Flesh out engine core
 -- [x] housekeeping
 -- [x] core mechanics
--- basic AI/mobs
--- basic UI
--- basic level generation
--- line of sight
+-- [x] basic AI/mobs
+-- [x]basic UI
+- basic random level generation
+- line of sight
 
 === Steps ======================================================================
 # [x] Organise project repository
@@ -58,13 +58,16 @@
 ## basic UI
 - ability to check stats (suggestion: map to 'c')
 
-## basic level generation
+## basic random level generation
 - generate a random level (for now some generic rooms connected with corridors)
-	for testing
+-- [x] room generation
+-- radnomise room generation
+-- random corrdors, most leading to a room
+-- level feature overlapping prevention
 
 ## line of sight
 - basic line of sight (no worries about obstacles for now)
--- player (display render)
+-- player (render only visible tiles)
 -- mob AI behaviour
 
 === Ideas ======================================================================

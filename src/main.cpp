@@ -51,15 +51,15 @@ void start(int _cmd)
 	System gamesys;
 	gamesys.init();
 	
-	gamesys.add_actr("human", 10, 40);
-	gamesys.add_actr("watcher", 10, 38);
+	gamesys.add_actr("human", 1, 1);
+	/*gamesys.add_actr("watcher", 10, 38);
 	gamesys.add_actr("watcher", 18, 58);
 	gamesys.add_actr("watcher", 14, 73);
 	gamesys.add_actr("watcher", 3, 42);
 	gamesys.add_actr("watcher", 55, 20);
 	gamesys.add_actr("watcher", 55, 40);
 	gamesys.add_actr("watcher", 39, 14);
-	gamesys.add_actr("watcher", 18, 7);
+	gamesys.add_actr("watcher", 18, 7);*/
 
 	while(_cmd != 'q'){
 		gamesys.render_mainw();
@@ -101,10 +101,10 @@ void wellcome()
 
 void endgame()
 {
-	print_cen(6, "**********************************************");
-	print_cen(7, "***                                        ***");
-	print_cen(8, "***   The life of our hero has ended, and  ***");
-	print_cen(9, "*** with it - the story.                   ***");
+	print_cen(6,  "**********************************************");
+	print_cen(7,  "***                                        ***");
+	print_cen(8,  "***   The life of our hero has ended, and  ***");
+	print_cen(9,  "*** with it - the story.                   ***");
 	print_cen(10, "***                                        ***");
 	print_cen(11, "**********************************************");
 	refresh();

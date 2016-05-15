@@ -164,3 +164,22 @@ Project time: 1d. 09:13:10
 Session time: 02:33:18
 Project time: 1d. 11:46:28
 
+[NEW SESSION] : 2016-05-15[10:38:09]Sunday
+[10:38:30] Spent a few hours learning and experimenting with random number
+generation and begun implementing random level generation.
+[END OF SESSION] : 2016-05-15[10:39:31]Sunday
+Session time: 03:31:22
+Project time: 1d. 15:17:50
+
+[NEW SESSION] : 2016-05-15[21:31:23]Sunday
+[21:31:34] Random level generation
+- came up with a possible algorithm (on paper)
+- expanded Map functionality to dynamically adapt when we want to place some
+tiles outside of the current size of the map.
+- implemented some functionality to generate rooms based on random parameters,
+still need to implement corridor generation and colission checking to prevent
+new architectural features from overlapping.
+[END OF SESSION] : 2016-05-15[21:40:10]Sunday
+Session time: 04:08:47
+Project time: 1d. 19:27:07
+

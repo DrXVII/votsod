@@ -1,2 +1,7 @@
+2016-05-15
+- continue implementing random level generation
+-- test the placement of a random tile outside of the generated room
+-- implement the "random" in tandom room generator
+-- generate corridors and 9/10 chance of room at the end of each corridor
 2016-05-09
 - Change actor and item arrays to the list type (see unorderd list aswell);

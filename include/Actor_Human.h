@@ -8,8 +8,7 @@ public:
 	Actor_Human(int _y, int _x);
 	~Actor_Human();
 
-	int take_turn();
-	int take_turn2(const vector<vector<Tile*>>& _tiles, vector<Actor*>& _actors);
+	int take_turn(const vector<vector<Tile*>>& _tiles, vector<Actor*>& _actors);
 };
 
 #endif // ACTOR_HUMAN_H

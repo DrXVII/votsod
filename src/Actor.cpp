@@ -17,8 +17,6 @@ unsigned int Actor::get_y() {return m_y;}
 
 int Actor::get_hp() {return m_hp;}
 
-std::string Actor::get_controller() {return m_controller;}
-
 void Actor::set_y(char _c) {m_y = _c;};
 
 void Actor::set_x(char _c) {m_x = _c;};

@@ -8,8 +8,7 @@ public:
 	Actor_Watcher(int _y, int _x);
 	~Actor_Watcher();
 	
-	int take_turn();
-	int take_turn2(const vector<vector<Tile*>>& _tiles, vector<Actor*>& _actors);
+	int take_turn(const vector<vector<Tile*>>& _tiles, vector<Actor*>& _actors);
 private:
 };
 

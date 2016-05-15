@@ -2,7 +2,6 @@
 
 Actor_Watcher::Actor_Watcher(int _y, int _x): Actor(_y, _x)
 {
-	m_controller = "AI_HOMMING";
 	m_icon = 'w';
 	m_maxhp = 5;
 	m_hp = m_maxhp;
@@ -11,8 +10,6 @@ Actor_Watcher::Actor_Watcher(int _y, int _x): Actor(_y, _x)
 
 Actor_Watcher::~Actor_Watcher() {}
 
-int Actor_Watcher::take_turn() {return 0;}
-
-int Actor_Watcher::take_turn2(const vector<vector<Tile*>>& _tiles,
+int Actor_Watcher::take_turn(const vector<vector<Tile*>>& _tiles,
 															vector<Actor*>& _actors)
 {return ai_homming(_tiles, _actors);}
