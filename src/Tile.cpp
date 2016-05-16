@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-Tile::Tile(){m_icon = '!';}
+Tile::Tile(){m_icon = '!'; m_ispassable = false;}
 
 Tile::~Tile(){}
 

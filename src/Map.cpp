@@ -127,7 +127,7 @@ void Map::make_room(unsigned const& _y, unsigned const& _x,
 }
 
 void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
-{
+{	
 	// while the map is too short - add rows
 	while(m_tiles.size() <= _y){
 		
@@ -161,18 +161,11 @@ void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
 	}
 }
 
-void Map::add_actr(const string& _type, const int& _y, const int& _x)
+void Map::add_actr(Actor* _a)
 {
-	if(_type == "human"){
-		m_actors.push_back(new Actor_Human(_y, _x));
-	}
-	else if(_type == "watcher"){
-		m_actors.push_back(new Actor_Watcher(_y, _x));
-	}
-	else{
-		mvprintw(22, 0, "WARNING: Rquest for unexpected actor type");
-		getch();
-	}
+	//TODO - add checks to not place the actor on non-existent tiles
+	
+	m_actors.push_back(_a);
 }
 
 int Map::start_turn()

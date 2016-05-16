@@ -21,8 +21,8 @@ public:
 	virtual unsigned int get_x();
 	virtual unsigned int get_y();
 	virtual int get_hp();
-	virtual void set_y(char _c);
-	virtual void set_x(char _c);
+	virtual void set_y(unsigned const& _i);
+	virtual void set_x(unsigned const& _i);
 	virtual int move_ai(int _cmd,
 											const vector<vector<Tile*>>& _tiles,
 											vector<Actor*>& _actors);

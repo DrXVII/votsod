@@ -33,7 +33,7 @@ void System::render_mainw()
 	refresh();
 }
 
-void System::add_actr(const string& _type, const int& _y, const int& _x)
+void System::add_actr(Actor* _a)
 {
-	m_currmap->add_actr(_type, _y, _x);
+	m_currmap->add_actr(_a);
 }

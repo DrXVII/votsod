@@ -10,9 +10,7 @@
 #include <ncurses.h>
 
 #include "Tiles.h"
-#include "Actor.h"
-#include "Actor_Human.h"
-#include "Actor_Watcher.h"
+#include "Actors.h"
 
 using std::vector;
 using std::string;
@@ -36,7 +34,7 @@ public:
 	void make_room(unsigned const& _y, unsigned const& _x,
 								 unsigned const& _w, unsigned const& _l);
 	void place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl);
-	void add_actr(const string& _type, const int& _y, const int& _x);
+	void add_actr(Actor* _a);
 	int start_turn();
 	void move_actor(const int& _cmd, Actor* _act);
 	void atk(Actor* _att, Actor* _def);

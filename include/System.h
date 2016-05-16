@@ -14,7 +14,7 @@ public:
 	void init();
 	int start_turn();
 	void render_mainw();
-	void add_actr(const string& _type, const int& _y, const int& _x);
+	void add_actr(Actor* _a);
 private:
 	vector<Map*> m_maps;
 	Map* m_currmap;

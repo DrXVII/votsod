@@ -17,9 +17,9 @@ unsigned int Actor::get_y() {return m_y;}
 
 int Actor::get_hp() {return m_hp;}
 
-void Actor::set_y(char _c) {m_y = _c;};
+void Actor::set_y(unsigned const& _i) {m_y = _i;};
 
-void Actor::set_x(char _c) {m_x = _c;};
+void Actor::set_x(unsigned const& _i) {m_x = _i;};
 
 int Actor::move_ai(int _cmd,
 									 const vector<vector<Tile*>>& _tiles,

@@ -17,9 +17,9 @@ implementing a screen buffer instead of several print passes.*/
 #include <fstream>
 //third party libraries
 #include <ncurses.h>
-//proprietary classes,classes
+//own libs,classes
+#include "Actors.h"
 #include "Map.h"
-#include "Actor.h"
 #include "Viewport.h"
 #include "System.h"
 
@@ -51,8 +51,8 @@ void start(int _cmd)
 	System gamesys;
 	gamesys.init();
 	
-	gamesys.add_actr("human", 1, 1);
-	/*gamesys.add_actr("watcher", 10, 38);
+	gamesys.add_actr(new Actor_Human(1, 1));
+	/*gamesys.add_actr("watcher", 10, 38); caution - these use the old add_actr()
 	gamesys.add_actr("watcher", 18, 58);
 	gamesys.add_actr("watcher", 14, 73);
 	gamesys.add_actr("watcher", 3, 42);
