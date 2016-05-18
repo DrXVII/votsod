@@ -24,7 +24,7 @@ practitioners would gather - that's a wole another level.
 The demons could be sorted in tiers like "Emperor", "King",
 "Lord / Principal(ity)", "Captain", "Leutenant" with the "Prince of Darkness"
 above them. Also possibly a few lower tiers to distinguish between the pawns.
-As the "tier I" "tier II" seems rather dull and even unrepresentative of 
+As the "tier I" "tier II" seems rather dull and even unrepresentative of
 the gameworld.
 
 - GAMEPLAY IDEA : MAGIC
@@ -33,15 +33,49 @@ the spell which would affect the otput of the given spell.
 Eg: spirit cannon - amt of pwr would affect range, explosion damage and radius,
 from a certain point the pufs of smoke would have a chance of dealing damage to
 creatures passing through them.
+Think about the possibility to further tailor some spells focusing energy
+towards different elements of the final spell eg.: area of effect, damage,
+duration, etc.
 
-- SPELL IDEA
+- SPELL IDEA - ART OF DESTRUCTION (Summoning)
 [SUMMON SWORDS](think of a better name)
 The caster summons several flying swords in a certain area (or within a
-certain perimeter around the target) which homm in on the targer to pierce it.
+certain perimeter around the target) which home in on the target to pierce it.
 
-- SPELL IDEA
+- SPELL IDEA - ART OF DESTRUCTION (Raw Power / Direct)
 [SPIRIT CANNON]
 The caster hurls a very quickly moving projectile at the target. The projectile
 explodes upon impact inflicting the bulk of the damage to the target, and some
-to the surrounding area (short radius). A few pufs of "magic" smoke are
+to the surrounding area (short radius). A few puffs of "magic" smoke are
 generated in the immediate vicinity.
+
+- SPELL IDEA - ART OF BINDING (Summoning)
+[BINDING CHAINS]
+The caster summons chains that spring from the ground to immobilise
+the target. The spell is geared towards immobilising large and/or less evasive
+targets that heavily rely on melee or close range abilities, thus increasing the
+power of this spell affects the durability of the chains far more than their
+speed (chance of success).
+The success of the spell is tested against the evasive ability of the target.
+Once trapped the target has a chance to break free each turn (target strength vs
+chain durability).
+
+- SPELL IDEA - ART OF BINDING (Raw Power)
+[BARRIER RAYS]
+A quick spell with a high chance to hit, but will be easily broken by stronger
+opponents.
+
+- SPELL IDEA - ART OF BINDING (Raw Power)
+[THICK AIR]Think of a better name
+An area effect spell meant to slow down or even immobilise groups of
+weaker adversaries. Additional power mainly influences the size of the area
+affected.
+
+- SPELL IDEA - ART OF DESTRUCTION (Fire/Summoning)
+[FIELD OF LIGHTS]
+Charges an area with the Fire element causing numerous small glowing particles
+to appear in the air. The calmly floating particles explode when disturbed with
+a chance to cause a chain reaction. Can be used as means of crowd control
+and/or area denial against groups of weaker adversaries.
+Additional power influences the size of the area affected as well as
+density/power of the particles in the field.
