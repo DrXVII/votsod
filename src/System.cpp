@@ -35,5 +35,8 @@ void System::render_mainw()
 
 void System::add_actr(Actor* _a)
 {
-	m_currmap->add_actr(_a);
+	if(m_currmap->add_actr(_a) != 0){
+		mvprintw(0, 0, "ERROR from m_currmap->add_actr(_a)"); refresh();
+		delete _a;
+	}
 }

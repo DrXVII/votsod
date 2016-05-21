@@ -49,10 +49,11 @@ int main()
 void start(int _cmd)
 {
 	System gamesys;
+	mvprintw(0, 0, "initialising game system                      "); refresh();
 	gamesys.init();
-	
-	/*gamesys.add_actr(new Actor_Human(5, 10));
-	gamesys.add_actr(new Actor_Watcher(10, 38));
+	mvprintw(0, 0, "adding actors                                 "); refresh();
+	gamesys.add_actr(new Actor_Human(2, 2));
+	/*gamesys.add_actr(new Actor_Watcher(10, 38));
 	gamesys.add_actr(new Actor_Watcher(18, 58));
 	gamesys.add_actr(new Actor_Watcher(14, 73));
 	gamesys.add_actr(new Actor_Watcher(3, 42));
@@ -60,7 +61,7 @@ void start(int _cmd)
 	gamesys.add_actr(new Actor_Watcher(55, 40));
 	gamesys.add_actr(new Actor_Watcher(39, 14));
 	gamesys.add_actr(new Actor_Watcher(18, 7));*/
-
+	mvprintw(0, 0, "starting gameloop                             "); refresh();
 	while(_cmd != 'q'){
 		gamesys.render_mainw();
 		

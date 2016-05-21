@@ -193,3 +193,11 @@ Project time: 1d. 20:27:50
 [12:41:39] Implemented controlled actor adding, to place actors at nearest
 passable tile if the actor add funciton gets request to place an actor where
 he would not be able to walk.
+[18:41:28] implemented generation of random room and tested support for random
+actor placement. Allso delved deeper into random number generation as some
+things were less random than they shoud have been.
+- Next - walls arround rooms, and then, finally corridors.
+[END OF SESSION] : 2016-05-21[18:43:39]Saturday
+Session time: 09:43:01
+Project time: 2d. 06:10:51
+
