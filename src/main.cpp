@@ -51,15 +51,15 @@ void start(int _cmd)
 	System gamesys;
 	gamesys.init();
 	
-	gamesys.add_actr(new Actor_Human(1, 1));
-	/*gamesys.add_actr("watcher", 10, 38); caution - these use the old add_actr()
-	gamesys.add_actr("watcher", 18, 58);
-	gamesys.add_actr("watcher", 14, 73);
-	gamesys.add_actr("watcher", 3, 42);
-	gamesys.add_actr("watcher", 55, 20);
-	gamesys.add_actr("watcher", 55, 40);
-	gamesys.add_actr("watcher", 39, 14);
-	gamesys.add_actr("watcher", 18, 7);*/
+	/*gamesys.add_actr(new Actor_Human(5, 10));
+	gamesys.add_actr(new Actor_Watcher(10, 38));
+	gamesys.add_actr(new Actor_Watcher(18, 58));
+	gamesys.add_actr(new Actor_Watcher(14, 73));
+	gamesys.add_actr(new Actor_Watcher(3, 42));
+	gamesys.add_actr(new Actor_Watcher(55, 20));
+	gamesys.add_actr(new Actor_Watcher(55, 40));
+	gamesys.add_actr(new Actor_Watcher(39, 14));
+	gamesys.add_actr(new Actor_Watcher(18, 7));*/
 
 	while(_cmd != 'q'){
 		gamesys.render_mainw();

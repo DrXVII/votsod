@@ -189,3 +189,7 @@ Project time: 1d. 19:27:07
 Session time: 01:00:43
 Project time: 1d. 20:27:50
 
+[NEW SESSION] : 2016-05-21[09:00:38]Saturday
+[12:41:39] Implemented controlled actor adding, to place actors at nearest
+passable tile if the actor add funciton gets request to place an actor where
+he would not be able to walk.

@@ -24,8 +24,8 @@ public:
 
 	Tile get_tile(unsigned int _x, unsigned int _y);
 	char get_tile_icon(unsigned int _x, unsigned int _y);
-	int get_w();
-	int get_h();
+	unsigned get_tiles_w();
+	unsigned get_tiles_h();
 	Actor* get_actr(const int& _i);
 	Actor* get_actr_atpos(const unsigned int& _y, const unsigned int _x,
 												Actor* _exclude);
@@ -41,6 +41,7 @@ public:
 	void remdead();
 	int gen_rand(int _max, int _min);
 private:
+	unsigned m_tilemap_w;
 	vector<vector<Tile*>> m_tiles;
 	vector<Actor*> m_actors;
 };
