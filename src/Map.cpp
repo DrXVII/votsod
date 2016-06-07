@@ -130,7 +130,14 @@ void Map::make_room(unsigned const& _y, unsigned const& _x,
 {
 	for(unsigned i = _y; i < _y + _l; i++){
 		for(unsigned j = _x; j < _x + _w; j++){
-			place_tile(i, j, new Tile_Empty);
+			//if border of room - place wall, else - floor
+			if(i == _y || j == _x
+			|| i + 1 == _y + _l || j + 1 == _x + _w){
+				place_tile(i, j, new Tile_Wall);
+			}
+			else {
+				place_tile(i, j, new Tile_Empty);
+			}
 		}
 	}
 }
