@@ -4,7 +4,7 @@
 -- [x] modify actor placement logic to prevent placing actors on impassable or
 non-existent tiles
 -- [x] implement the "random" in random room generator
--- generate walls around random rooms
--- generate corridors and 9/10 chance of room at the end of each corridor
+-- [x] generate walls around random rooms
+-- generate corridors and chance (9/10?) of room at the end of each corridor
 2016-05-09
 - Change actor and item arrays to the list type (see unorderd list aswell);
