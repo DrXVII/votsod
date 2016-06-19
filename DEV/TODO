@@ -1,3 +1,5 @@
+2016-06-19
+- [ ] implement a logfile for debugging (instead of random prints)
 2016-05-15
 - continue implementing random level generation
 -- [x] test the placement of a random tile outside of the generated room
