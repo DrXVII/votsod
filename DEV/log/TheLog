@@ -209,3 +209,13 @@ be able to move off of the edge of the world into the realm of unassigned RAM :D
 Session time: 00:22:08
 Project time: 2d. 06:32:59
 
+[NEW SESSION] : 2016-06-19[18:57:03]Sunday
+[18:57:13] Worked out a solution for and started implementing full random level 
+generation, today made the
+tools to make simple corridors to any direction, will continue from there next t
+ime by generating rooms
+at the end of corridors if there is enough empty space
+[END OF SESSION] : 2016-06-19[19:00:24]Sunday
+Session time: 01:33:21
+Project time: 2d. 08:06:20
+
