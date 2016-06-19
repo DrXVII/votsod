@@ -110,19 +110,31 @@ void Map::gen_lev()
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine gen(seed);
 	std::uniform_int_distribution<int> posd(0, 99);
-	std::uniform_int_distribution<int> sized(2, 20);
+	std::uniform_int_distribution<int> sized(4, 10);
 	
-	int rm_y = posd(gen); //y of room's upper left corner
-	int rm_x = posd(gen); //x of room's upper left corner
-	int rm_w = sized(gen); //room's width
-	int rm_l = sized(gen); //room's length
-	string msg = "making a room " + to_string(rm_x) + "/" + to_string(rm_y) + " ";
-	msg = msg + to_string(rm_w) + "/" + to_string(rm_l) + " ... ";
-	mvprintw(1, 0, msg.c_str()); refresh();
-	make_room(rm_y, rm_x, rm_w, rm_l);
-	mvprintw(1, 40, "done."); refresh();
+	//will store room centerpoints for corridor generation
+	vector<coord2*> rctrs;
 	
-	//make_room(85, 26, 7, 18);
+//	unsigned rmax = 10;
+//	for(unsigned i = 0; i < rmax; i++){
+		int rm_y = posd(gen); //y of room's upper left corner
+		int rm_x = posd(gen); //x of room's upper left corner
+		int rm_w = sized(gen); //room's width
+		int rm_l = sized(gen); //room's length
+		
+		string msg = "making a room " + to_string(rm_x) + "/" + to_string(rm_y) + " ";
+		msg = msg + to_string(rm_w) + "/" + to_string(rm_l) + " ... ";
+		mvprintw(1, 0, msg.c_str()); refresh();
+		make_room(rm_y, rm_x, rm_w, rm_l);
+		mvprintw(1, 40, "done."); refresh();
+		rctrs.push_back(new coord2);
+		// testing with element [0], remove and uncomment before proceeding further
+		rctrs[0]->y = rm_y + (rm_l / 2);
+		rctrs[0]->x = rm_x + (rm_w / 2);
+		make_corr(rctrs[0]->y, rctrs[0]->x, 10, 6);
+//		rctrs[i]->y = rm_y + (rm_l / 2);
+//		rctrs[i]->x = rm_x + (rm_w / 2);
+//	}
 }
 
 void Map::make_room(unsigned const& _y, unsigned const& _x,
@@ -141,6 +153,40 @@ void Map::make_room(unsigned const& _y, unsigned const& _x,
 		}
 	}
 }
+
+void Map::make_corr(const unsigned int& _y, const unsigned int& _x,
+										const unsigned int& _l, const unsigned int& _dir)
+{
+	//TODO implement out-of-bounds guards
+	//TODO implement corridor wall gereration
+	
+	unsigned left = _l;
+	unsigned y = _y;
+	unsigned x = _x;
+	
+	while(get_tile(y, x).get_ispassable()){
+		switch(_dir){
+			case 8: y--; break;
+			case 6: x++; break;
+			case 2: y++; break;
+			case 4: x--; break;
+			default: return;
+		}
+	}
+	
+	while(left > 0){
+		place_tile(y, x, new Tile_Empty);
+		left--;
+		switch(_dir){
+			case 8: y--; break;
+			case 6: x++; break;
+			case 2: y++; break;
+			case 4: x--; break;
+			default: return;
+		}
+	}
+}
+
 
 void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
 {	
@@ -255,7 +301,6 @@ int Map::add_actr(Actor* _a)
 				m_actors.push_back(_a);
 				return 0;
 			}
-			
 		}
 	}
 	
