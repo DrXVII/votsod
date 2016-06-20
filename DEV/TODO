@@ -1,7 +1,8 @@
-2016-06-19
+2016-06-20
 - [ ] finish implementing random level generation
 -- [ ] generate a corridor to random direction and room at the end of it
 -- [ ] generate corridor walls
+2016-06-19
 - [ ] implement a logfile for debugging (instead of random prints)
 2016-05-15
 - continue implementing random level generation
