@@ -112,32 +112,24 @@ void Map::gen_lev()
 	std::uniform_int_distribution<int> posd(0, 99);
 	std::uniform_int_distribution<int> sized(4, 10);
 	
-	//will store room centerpoints for corridor generation
-	vector<coord2*> rctrs;
+	vector<coord2> rctrs; //room centerpoints
+	vector<coord2> cends; //corridor endpoints
 	
-//	unsigned rmax = 10;
-//	for(unsigned i = 0; i < rmax; i++){
+	unsigned rmax = 1;
+	for(unsigned i = 0; i < rmax; i++){
 		int rm_y = posd(gen); //y of room's upper left corner
 		int rm_x = posd(gen); //x of room's upper left corner
 		int rm_w = sized(gen); //room's width
 		int rm_l = sized(gen); //room's length
 		
-		string msg = "making a room " + to_string(rm_x) + "/" + to_string(rm_y) + " ";
-		msg = msg + to_string(rm_w) + "/" + to_string(rm_l) + " ... ";
-		mvprintw(1, 0, msg.c_str()); refresh();
-		make_room(rm_y, rm_x, rm_w, rm_l);
-		mvprintw(1, 40, "done."); refresh();
-		rctrs.push_back(new coord2);
-		// testing with element [0], remove and uncomment before proceeding further
-		rctrs[0]->y = rm_y + (rm_l / 2);
-		rctrs[0]->x = rm_x + (rm_w / 2);
-		make_corr(rctrs[0]->y, rctrs[0]->x, 10, 6);
-//		rctrs[i]->y = rm_y + (rm_l / 2);
-//		rctrs[i]->x = rm_x + (rm_w / 2);
-//	}
+		if(rctrs.size() == 0){
+			rctrs.push_back(static_cast<coord2>(make_room(rm_y, rm_x, rm_w, rm_l)));
+		}
+		cends.push_back(static_cast<coord2>(make_corr(rctrs[i].y,rctrs[i].x,10,6)));
+	}
 }
 
-void Map::make_room(unsigned const& _y, unsigned const& _x,
+coord2 Map::make_room(unsigned const& _y, unsigned const& _x,
 										unsigned const& _w, unsigned const& _l)
 {
 	for(unsigned i = _y; i < _y + _l; i++){
@@ -152,28 +144,47 @@ void Map::make_room(unsigned const& _y, unsigned const& _x,
 			}
 		}
 	}
+	
+	coord2 roomcenter;
+	roomcenter.y = _y + (_l / 2);
+	roomcenter.x = _x + (_w / 2);
+	return roomcenter;
 }
 
-void Map::make_corr(const unsigned int& _y, const unsigned int& _x,
+coord2 Map::make_corr(const unsigned int& _y, const unsigned int& _x,
 										const unsigned int& _l, const unsigned int& _dir)
 {
-	//TODO implement out-of-bounds guards
-	//TODO implement corridor wall gereration
+	//TODO implement corridor wall generation
 	
 	unsigned left = _l;
 	unsigned y = _y;
 	unsigned x = _x;
+	coord2 endpoint;
 	
+	//set the real starting point of corridor
 	while(get_tile(y, x).get_ispassable()){
 		switch(_dir){
 			case 8: y--; break;
 			case 6: x++; break;
 			case 2: y++; break;
 			case 4: x--; break;
-			default: return;
+			default: //TODO log a warning of invalid call
+				endpoint.y = y;
+				endpoint.x = x;
+				return endpoint;
+		}
+		//out of bounds guards
+		if(y <= 0 && _dir == 8){
+			y = 0;
+			break;
+		}
+		if(x <= 0 && _dir == 4){
+			x = 0;
+			break;
 		}
 	}
-	
+
+	//place corridor on map
 	while(left > 0){
 		place_tile(y, x, new Tile_Empty);
 		left--;
@@ -182,9 +193,25 @@ void Map::make_corr(const unsigned int& _y, const unsigned int& _x,
 			case 6: x++; break;
 			case 2: y++; break;
 			case 4: x--; break;
-			default: return;
+			default: //TODO log a warning of invalid call
+				endpoint.y = y;
+				endpoint.x = x;
+				return endpoint;
+		}
+		//out of bounds guards
+		if(y <= 0 && _dir == 8){
+			y = 0;
+			break;
+		}
+		if(x <= 0 && _dir == 4){
+			x = 0;
+			break;
 		}
 	}
+	
+	endpoint.y = y;
+	endpoint.x = x;
+	return endpoint;
 }
 
 

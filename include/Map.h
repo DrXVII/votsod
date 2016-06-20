@@ -32,10 +32,10 @@ public:
 												Actor* _exclude);
 	int get_actrcount();
 	void gen_lev();
-	void make_room(unsigned const& _y, unsigned const& _x,
-								 unsigned const& _w, unsigned const& _l);
-	void make_corr(unsigned const& _y, unsigned const& _x,
-								 unsigned const& _l, unsigned const& _dir);
+	coord2 make_room(unsigned const& _y, unsigned const& _x,
+									 unsigned const& _w, unsigned const& _l);
+	coord2 make_corr(unsigned const& _y, unsigned const& _x,
+									 unsigned const& _l, unsigned const& _dir);
 	void place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl);
 	int add_actr(Actor* _a);
 	int start_turn();
