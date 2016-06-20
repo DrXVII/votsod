@@ -3,7 +3,7 @@
 - [x] Organise project repository
 - [x] Create an initial design for the engine core
 - [x] Refactor and review old code
-- Flesh out engine core
+- [x] Flesh out engine core
 -- [x] housekeeping
 -- [x] core mechanics
 -- [x] basic AI/mobs
@@ -53,16 +53,17 @@
 ## basic AI/mobs
 - basic mobs
 -- [x] introduce an AI-less mob (let's consider it a training dummy :D )
--- implement basic mob AI (only homing for now)
+-- [x] implement basic mob AI (only homing for now)
 
 ## basic UI
+- [x] display hp (later other common information) on the sidebar
 - ability to check stats (suggestion: map to 'c')
 
 ## basic random level generation
 - generate a random level (for now some generic rooms connected with corridors)
 -- [x] room generation
--- radnomise room generation
--- random corrdors, most leading to a room
+-- [x] radnomise room generation
+-- random corridors, most leading to a room
 -- level feature overlapping prevention
 
 ## line of sight

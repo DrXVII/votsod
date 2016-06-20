@@ -107,30 +107,63 @@ unsigned Map::get_tiles_h() {return m_tiles.size();}
 
 void Map::gen_lev()
 {
+	/*TODO - figure out why some rooms end up unalligned, seems like mostly
+	 rooms placed at the ends of direction 8 corridors are affected.
+	 - Try recreating the situation with randomness disabled.*/
+	
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine gen(seed);
 	std::uniform_int_distribution<int> posd(0, 99);
 	std::uniform_int_distribution<int> sized(4, 10);
+	std::uniform_int_distribution<int> dird(1, 8);
 	
-	vector<coord2> rctrs; //room centerpoints
-	vector<coord2> cends; //corridor endpoints
+	vector<Coord2> rctrs; //room centerpoints
+	vector<Coord2> cends; //corridor endpoints
 	
-	unsigned rmax = 1;
+	unsigned rmax = 20;
 	for(unsigned i = 0; i < rmax; i++){
 		int rm_y = posd(gen); //y of room's upper left corner
 		int rm_x = posd(gen); //x of room's upper left corner
 		int rm_w = sized(gen); //room's width
 		int rm_l = sized(gen); //room's length
+		int cor_d = dird(gen); //corridor direction
 		
+		//for now, only the 4 cardinal numpad direcrtions are allowed - 8, 6, 2, 4
+		if(cor_d < 3) {cor_d = 2;}
+		if(cor_d < 5) {cor_d = 4;}
+		if(cor_d < 7) {cor_d = 6;}
+		else {cor_d = 8;}
+		
+		//if no rooms are present yet - make the first one before making corridors
 		if(rctrs.size() == 0){
-			rctrs.push_back(static_cast<coord2>(make_room(rm_y, rm_x, rm_w, rm_l)));
+			rctrs.push_back(static_cast<Coord2>(make_room(rm_y, rm_x, rm_w, rm_l)));
 		}
-		cends.push_back(static_cast<coord2>(make_corr(rctrs[i].y,rctrs[i].x,10,6)));
+		else {
+			//allign room placement to the endpoint of most recently created corridor
+			rm_x = cends.back().x;
+			rm_y = cends.back().y;
+			switch(cor_d){
+				case 8: rm_y -= rm_l; rm_x -= rm_w / 2; break;
+				case 6: rm_y -= rm_l / 2; break;
+				case 2: rm_x -= rm_w / 2; break;
+				case 4: rm_x -= rm_w; rm_y -= rm_l / 2; break;
+			}
+			
+			rctrs.push_back(make_room(rm_y, rm_x, rm_w, rm_l));
+			//make entrance to new room at the end of most recently created corridor
+			place_tile(cends.back().y, cends.back().x, new Tile_Empty);
+		}
+		//place another corridor from randomly selected room if rmax is not reached
+		if(i < rmax){
+			std::uniform_int_distribution<short> rctrsd(0, rctrs.size() - 1);
+			short rcp = rctrsd(gen);
+			cends.push_back(make_corr(rctrs[rcp].y, rctrs[rcp].x, sized(gen), cor_d));
+		}
 	}
 }
 
-coord2 Map::make_room(unsigned const& _y, unsigned const& _x,
-										unsigned const& _w, unsigned const& _l)
+Coord2 Map::make_room(const unsigned& _y, const unsigned& _x,
+										 const unsigned& _w, const unsigned& _l)
 {
 	for(unsigned i = _y; i < _y + _l; i++){
 		for(unsigned j = _x; j < _x + _w; j++){
@@ -145,73 +178,71 @@ coord2 Map::make_room(unsigned const& _y, unsigned const& _x,
 		}
 	}
 	
-	coord2 roomcenter;
-	roomcenter.y = _y + (_l / 2);
-	roomcenter.x = _x + (_w / 2);
+	Coord2 roomcenter(_y + (_l / 2), _x + (_w / 2));
 	return roomcenter;
 }
 
-coord2 Map::make_corr(const unsigned int& _y, const unsigned int& _x,
-										const unsigned int& _l, const unsigned int& _dir)
+Coord2 Map::make_corr(unsigned _y, unsigned _x,
+										const unsigned& _l, unsigned _dir)
 {
 	//TODO implement corridor wall generation
-	
+		
 	unsigned left = _l;
-	unsigned y = _y;
-	unsigned x = _x;
-	coord2 endpoint;
+
+	if(_l == 0){return Coord2(_y, _x);}
+	
+	// for now, there are 4 cardinal numpad direcrtions allowed - 8, 6, 2, 4
+	if(_dir < 3) {_dir = 2;}
+	if(_dir < 5) {_dir = 4;}
+	if(_dir < 7) {_dir = 6;}
+	else {_dir = 8;}
 	
 	//set the real starting point of corridor
-	while(get_tile(y, x).get_ispassable()){
+	while(get_tile(_y, _x).get_ispassable()){
 		switch(_dir){
-			case 8: y--; break;
-			case 6: x++; break;
-			case 2: y++; break;
-			case 4: x--; break;
+			case 8: _y--; break;
+			case 6: _x++; break;
+			case 2: _y++; break;
+			case 4: _x--; break;
 			default: //TODO log a warning of invalid call
-				endpoint.y = y;
-				endpoint.x = x;
-				return endpoint;
+				return Coord2(_y, _x);
 		}
 		//out of bounds guards
-		if(y <= 0 && _dir == 8){
-			y = 0;
+		if(_y <= 0 && _dir == 8){
+			_y = 0;
 			break;
 		}
-		if(x <= 0 && _dir == 4){
-			x = 0;
+		if(_x <= 0 && _dir == 4){
+			_x = 0;
 			break;
 		}
 	}
 
 	//place corridor on map
 	while(left > 0){
-		place_tile(y, x, new Tile_Empty);
+		place_tile(_y, _x, new Tile_Empty);
 		left--;
+		if(left == 0) {return Coord2(_y, _x);}
 		switch(_dir){
-			case 8: y--; break;
-			case 6: x++; break;
-			case 2: y++; break;
-			case 4: x--; break;
+			case 8: _y--; break;
+			case 6: _x++; break;
+			case 2: _y++; break;
+			case 4: _x--; break;
 			default: //TODO log a warning of invalid call
-				endpoint.y = y;
-				endpoint.x = x;
-				return endpoint;
+				return Coord2(_y, _x);
 		}
 		//out of bounds guards
-		if(y <= 0 && _dir == 8){
-			y = 0;
+		if(_y <= 0 && _dir == 8){
+			_y = 0;
 			break;
 		}
-		if(x <= 0 && _dir == 4){
-			x = 0;
+		if(_x <= 0 && _dir == 4){
+			_x = 0;
 			break;
 		}
 	}
 	
-	endpoint.y = y;
-	endpoint.x = x;
-	return endpoint;
+	return Coord2(_y, _x);
 }
 
 

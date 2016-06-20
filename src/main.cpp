@@ -53,14 +53,13 @@ void start(int _cmd)
 	gamesys.init();
 	mvprintw(0, 0, "adding actors                                 "); refresh();
 	gamesys.add_actr(new Actor_Human(2, 2));
-	/*gamesys.add_actr(new Actor_Watcher(10, 38));
-	gamesys.add_actr(new Actor_Watcher(18, 58));
-	gamesys.add_actr(new Actor_Watcher(14, 73));
-	gamesys.add_actr(new Actor_Watcher(3, 42));
-	gamesys.add_actr(new Actor_Watcher(55, 20));
-	gamesys.add_actr(new Actor_Watcher(55, 40));
-	gamesys.add_actr(new Actor_Watcher(39, 14));
-	gamesys.add_actr(new Actor_Watcher(18, 7));*/
+	
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine gen(seed);
+	std::uniform_int_distribution<unsigned> mob_pos_d(0, 99);
+	for(int i = 0; i < 10; i++){
+		gamesys.add_actr(new Actor_Watcher(mob_pos_d(gen), mob_pos_d(gen)));
+	}
 	mvprintw(0, 0, "starting gameloop                             "); refresh();
 	while(_cmd != 'q'){
 		gamesys.render_mainw();

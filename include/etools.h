@@ -5,7 +5,11 @@
 
 //TODO add the printinmiddle function
 
-struct coord2 {
+class Coord2 {
+public:
+	Coord2(const unsigned& _y, const unsigned& _x):y(_y), x(_x){};
+	~Coord2(){};
+	
 	unsigned int y, x;
 };
 

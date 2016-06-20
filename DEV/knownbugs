@@ -1,3 +1,1 @@
-1 - if a friendly actor gets in the way of an AI using move_ai(), the friendly
-actor will get attacked as long as it is on the tile where move_ai() is trying
-to step on.
+1 - the AI doesn't differentiate between friend or foe.
