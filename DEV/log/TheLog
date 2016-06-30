@@ -233,3 +233,13 @@ ls are there.
 Session time: 03:02:11
 Project time: 2d. 12:39:23
 
+[NEW SESSION] : 2016-06-30[09:57:05]Thursday
+[09:57:13] fixed most map generation errors. What's left is:
+- Random crashing when Votsod tries to generate level bits outside of map boundr
+ies.
+- Some rooms inaccessible due to map element overlapping during generation, impl
+ementing that is in the workplan.
+[END OF SESSION] : 2016-06-30[09:59:50]Thursday
+Session time: 02:02:45
+Project time: 2d. 14:42:08
+
