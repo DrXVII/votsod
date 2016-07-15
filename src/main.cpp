@@ -88,7 +88,7 @@ void init_ncurses()
 
 void wellcome()
 {
-	string gmVer = "build: v0.00.5 || 2016-5-13[22:52:00]Friday";
+	string gmVer = "build: v0.00.6 || 2016-07-15[13:45:00]Friday";
 	
 	print_cen(8, "Hello everyone.");
 	print_cen(10, "Welcome to ASCIIWORLD!");

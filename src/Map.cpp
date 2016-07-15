@@ -169,7 +169,9 @@ Coord2 Map::make_room(const unsigned& _y, const unsigned& _x,
 			//if border of room - place wall, else - floor
 			if(i == _y || j == _x
 			|| i + 1 == _y + _l || j + 1 == _x + _w){
-				place_tile(i, j, new Tile_Wall);
+				if(!get_tile(i, j).get_ispassable()){
+					place_tile(i, j, new Tile_Wall);
+				}
 			}
 			else {
 				place_tile(i, j, new Tile_Empty);
@@ -220,6 +222,23 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 	//place corridor on map
 	while(left > 0){
 		place_tile(_y, _x, new Tile_Empty);
+		//place walls
+		if(_dir == 2 || _dir == 8){
+			if(!get_tile(_y,_x - 1).get_ispassable()){
+				place_tile(_y, _x - 1, new Tile_Wall);
+			}
+			if(!get_tile(_y,_x + 1).get_ispassable()){
+				place_tile(_y, _x + 1, new Tile_Wall);
+			}
+		}
+		else if(_dir == 4 || _dir == 6){
+			if(!get_tile(_y - 1, _x).get_ispassable()){
+				place_tile(_y - 1, _x, new Tile_Wall);
+			}
+			if(!get_tile(_y + 1, _x).get_ispassable()){
+				place_tile(_y + 1, _x, new Tile_Wall);
+			}
+		}
 		left--;
 		if(left == 0) {return Coord2(_y, _x);}
 		switch(_dir){
@@ -230,17 +249,18 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 			default: //TODO log a warning of invalid call
 				return Coord2(_y, _x);
 		}
-		//out of bounds guards
-		if(_y <= 0 && _dir == 8){
+		//out of bounds guards (+1 margin for wall placement)
+		if(_y <= 1 && _dir == 8){
 			_y = 0;
 			break;
 		}
-		if(_x <= 0 && _dir == 4){
+		if(_x <= 1 && _dir == 4){
 			_x = 0;
 			break;
 		}
 	}
 	
+	// return the endpoint coordinates
 	return Coord2(_y, _x);
 }
 
