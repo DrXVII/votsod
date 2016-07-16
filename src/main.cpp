@@ -11,6 +11,7 @@
 /*TODO - due to different arrays containing items to be seen, consider
 implementing a screen buffer instead of several print passes.*/
 //TODO - destructors for classes storing objects in the heap (e.g. Map class)
+//TODO - levels of debug logging verbocity (e.g. via a config file)
 
 //core libraries
 #include <string>
@@ -33,10 +34,13 @@ void endgame();
 void goodbye();
 void print_cen(int _ln, const string& _s);//prints _s centered on line _ln
 
+
 int main()
 {
 	int cmd = ' ';
-
+	
+	etools::log_new_session();
+	
 	init_ncurses();
 	wellcome();
 	start(cmd);
@@ -49,18 +53,17 @@ int main()
 void start(int _cmd)
 {
 	System gamesys;
-	mvprintw(0, 0, "initialising game system                      "); refresh();
+	etools::log_add("initialising game system");
 	gamesys.init();
-	mvprintw(0, 0, "adding actors                                 "); refresh();
+	etools::log_add("adding actors");
 	gamesys.add_actr(new Actor_Human(2, 2));
-	/*gamesys.add_actr(new Actor_Watcher(10, 38));
-	gamesys.add_actr(new Actor_Watcher(18, 58));
-	gamesys.add_actr(new Actor_Watcher(14, 73));
-	gamesys.add_actr(new Actor_Watcher(3, 42));
-	gamesys.add_actr(new Actor_Watcher(55, 20));
-	gamesys.add_actr(new Actor_Watcher(55, 40));
-	gamesys.add_actr(new Actor_Watcher(39, 14));
-	gamesys.add_actr(new Actor_Watcher(18, 7));*/
+	
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine gen(seed);
+	std::uniform_int_distribution<unsigned> mob_pos_d(0, 99);
+	for(int i = 0; i < 10; i++){
+		gamesys.add_actr(new Actor_Watcher(mob_pos_d(gen), mob_pos_d(gen)));
+	}
 	mvprintw(0, 0, "starting gameloop                             "); refresh();
 	while(_cmd != 'q'){
 		gamesys.render_mainw();
@@ -89,7 +92,7 @@ void init_ncurses()
 
 void wellcome()
 {
-	string gmVer = "build: v0.00.5 || 2016-5-13[22:52:00]Friday";
+	string gmVer = "build: v0.00.6 || 2016-07-15[13:45:00]Friday";
 	
 	print_cen(8, "Hello everyone.");
 	print_cen(10, "Welcome to ASCIIWORLD!");

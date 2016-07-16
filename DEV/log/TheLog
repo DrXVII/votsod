@@ -219,3 +219,44 @@ at the end of corridors if there is enough empty space
 Session time: 01:33:21
 Project time: 2d. 08:06:20
 
+[NEW SESSION] : 2016-06-20[11:53:38]Monday
+[04:53:47] Continuing implementation of random level generation.
+[END OF SESSION] : 2016-06-20[11:54:30]Monday
+Session time: 01:30:52
+Project time: 2d. 09:37:12
+
+[NEW SESSION] : 2016-06-20[22:49:18]Monday
+[22:49:23] Added a lot to the random room generation process, finally the level 
+starts taking a shape, still a lot of bugs though, but most of the logic and too
+ls are there.
+[END OF SESSION] : 2016-06-20[22:51:29]Monday
+Session time: 03:02:11
+Project time: 2d. 12:39:23
+
+[NEW SESSION] : 2016-06-30[09:57:05]Thursday
+[09:57:13] fixed most map generation errors. What's left is:
+- Random crashing when Votsod tries to generate level bits outside of map boundr
+ies.
+- Some rooms inaccessible due to map element overlapping during generation, impl
+ementing that is in the workplan.
+[END OF SESSION] : 2016-06-30[09:59:50]Thursday
+Session time: 02:02:45
+Project time: 2d. 14:42:08
+
+[NEW SESSION] : 2016-07-15[06:32:34]Friday
+[06:32:44] Solved the problem where some of the map elements were inaccessible. 
+BTW the time is actually 13:32:44, the system time is off since i'm working in a
+ virtual machine and apparently did something wrong when installing Debian :D
+[END OF SESSION] : 2016-07-15[06:35:30]Friday
+Session time: 00:37:56
+Project time: 2d. 15:20:04
+
+[NEW SESSION] : 2016-07-16[14:04:15]Saturday
+[14:04:33] Implemented a debug log functionality.
+[14:05:21] Solved the random crashing issue. There were two problems causing thi
+s, took me some time to realise. But the new logging functionality made things m
+uch clearer.
+[END OF SESSION] : 2016-07-16[14:07:15]Saturday
+Session time: 05:03:00
+Project time: 2d. 20:23:04
+

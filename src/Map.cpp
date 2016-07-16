@@ -52,11 +52,9 @@ Tile Map::get_tile(unsigned int _y, unsigned int _x)
 		return *m_tiles[_y][_x];
 	}
 	else{
-		mvprintw(20, 0, "ERROR: GetTile() Tried to probe a non-existant tile.");
-		string sX = to_string(_x);
-		string sY = to_string(_y);
-		string sB = "x:" + sX + " y:" + sY;
-		mvprintw(21, 0, sB.c_str());
+		//etools::log_add("ERROR: GetTile() Tried to probe a non-existant tile.");
+		//string msg = "x:" + to_string(_x) + " y:" + to_string(_y);
+		//etools::log_add(msg);
 		Tile emptyTile;
 		return emptyTile;
 	}
@@ -73,11 +71,9 @@ char Map::get_tile_icon(unsigned int _y, unsigned int _x)
 		return ret;
 	}
 	else{
-		mvprintw(20, 0, "ERROR: GetTileIcon() Tried to probe a non-existant tile.");
-		string sX = to_string(_x);
-		string sY = to_string(_y);
-		string sB = "x:" + sX + " y:" + sY;
-		mvprintw(21, 0, sB.c_str());
+		//etools::log_add("ERROR: GetTileIcon() Tried to probe a non-existant tile.");
+		//string msg = "x:" + to_string(_x) + " y:" + to_string(_y);
+		//etools::log_add(msg);
 
 		return '!';
 	}
@@ -106,85 +102,186 @@ unsigned Map::get_tiles_w() {return m_tilemap_w;}
 unsigned Map::get_tiles_h() {return m_tiles.size();}
 
 void Map::gen_lev()
-{
+{	
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine gen(seed);
 	std::uniform_int_distribution<int> posd(0, 99);
 	std::uniform_int_distribution<int> sized(4, 10);
+	std::uniform_int_distribution<int> dird(1, 8);
 	
-	//will store room centerpoints for corridor generation
-	vector<coord2*> rctrs;
+	vector<Coord2> rctrs; //room centerpoints
+	vector<Coord2> cends; //corridor endpoints
 	
-//	unsigned rmax = 10;
-//	for(unsigned i = 0; i < rmax; i++){
+	etools::log_add("Genarating level...");
+	
+	const unsigned rmax = 20;
+	for(unsigned i = 0; i < rmax; i++){
 		int rm_y = posd(gen); //y of room's upper left corner
 		int rm_x = posd(gen); //x of room's upper left corner
 		int rm_w = sized(gen); //room's width
 		int rm_l = sized(gen); //room's length
+		int cor_d = dird(gen); //corridor direction
 		
-		string msg = "making a room " + to_string(rm_x) + "/" + to_string(rm_y) + " ";
-		msg = msg + to_string(rm_w) + "/" + to_string(rm_l) + " ... ";
-		mvprintw(1, 0, msg.c_str()); refresh();
-		make_room(rm_y, rm_x, rm_w, rm_l);
-		mvprintw(1, 40, "done."); refresh();
-		rctrs.push_back(new coord2);
-		// testing with element [0], remove and uncomment before proceeding further
-		rctrs[0]->y = rm_y + (rm_l / 2);
-		rctrs[0]->x = rm_x + (rm_w / 2);
-		make_corr(rctrs[0]->y, rctrs[0]->x, 10, 6);
-//		rctrs[i]->y = rm_y + (rm_l / 2);
-//		rctrs[i]->x = rm_x + (rm_w / 2);
-//	}
+		//for now, only the 4 cardinal numpad direcrtions are allowed - 8, 6, 2, 4
+		if(cor_d > 6) {cor_d = 8;}
+		else if(cor_d > 4 && cor_d < 7) {cor_d = 6;}
+		else if(cor_d > 2 && cor_d < 5) {cor_d = 4;}
+		else {cor_d = 2;}
+		
+		//if no rooms are present yet - make the first one before making corridors
+		if(rctrs.size() == 0){
+			rctrs.push_back(make_room(rm_y, rm_x, rm_w, rm_l));
+		}
+		else {
+			//place corridor from randomly selected room centre if rmax is not reached
+			if(i < rmax){
+				std::uniform_int_distribution<short> rctrsd(0, rctrs.size() - 1);
+				short rcp = rctrsd(gen);
+				unsigned cor_y = rctrs[rcp].y;
+				unsigned cor_x = rctrs[rcp].x;
+				unsigned cor_l = sized(gen);
+
+				cends.push_back(make_corr(cor_y, cor_x, cor_l, cor_d));
+				etools::log_add("corr endpoint: " + to_string(cends.back().y) + "/" + to_string(cends.back().x));
+			}
+			//allign room placement to the endpoint of most recently created corridor
+			rm_x = cends.back().x;
+			rm_y = cends.back().y;
+			switch(cor_d){
+				case 8: rm_y -= (rm_l - 1); rm_x -= (rm_w - 1) / 2; break;
+				case 6: rm_y -= (rm_l - 1) / 2; break;
+				case 2: rm_x -= (rm_w - 1) / 2; break;
+				case 4: rm_x -= (rm_w - 1); rm_y -= (rm_l - 1) / 2; break;
+			}
+			//out of bounds guards
+			if(rm_y < 0 || rm_x < 0) {
+				etools::log_add("WARNING: gen_lev() alligned room out of bounds.");
+				cends.pop_back(); //removing node that's too close to the border
+				if(i > 0) {i--;}
+				continue;
+			}
+			rctrs.push_back(make_room(rm_y, rm_x, rm_w, rm_l));
+			//make entrance to new room at the end of most recently created corridor
+			place_tile(cends.back().y, cends.back().x, new Tile_Empty);
+		}
+	}
+	etools::log_add("level generated (" + to_string(get_tiles_w())
+									+ "/" + to_string(get_tiles_h()) + " )");
 }
 
-void Map::make_room(unsigned const& _y, unsigned const& _x,
-										unsigned const& _w, unsigned const& _l)
+Coord2 Map::make_room(const unsigned& _y, const unsigned& _x,
+										 const unsigned& _w, const unsigned& _l)
 {
+	string msg = "making room " + to_string(_y) + "/" + to_string(_x)
+							 + ":" + to_string(_w) + "/" + to_string(_l);
+	etools::log_add(msg);
+	
 	for(unsigned i = _y; i < _y + _l; i++){
 		for(unsigned j = _x; j < _x + _w; j++){
 			//if border of room - place wall, else - floor
 			if(i == _y || j == _x
 			|| i + 1 == _y + _l || j + 1 == _x + _w){
-				place_tile(i, j, new Tile_Wall);
+				if(!get_tile(i, j).get_ispassable()){
+					place_tile(i, j, new Tile_Wall);
+				}
 			}
 			else {
 				place_tile(i, j, new Tile_Empty);
 			}
 		}
 	}
+	
+	Coord2 roomcenter(_y + (_l / 2), _x + (_w / 2));
+	return roomcenter;
 }
 
-void Map::make_corr(const unsigned int& _y, const unsigned int& _x,
-										const unsigned int& _l, const unsigned int& _dir)
+Coord2 Map::make_corr(unsigned _y, unsigned _x,
+										const unsigned& _l, unsigned _dir)
 {
-	//TODO implement out-of-bounds guards
-	//TODO implement corridor wall gereration
-	
 	unsigned left = _l;
-	unsigned y = _y;
-	unsigned x = _x;
+
+	string msg = "making corr " + to_string(_y) + "/" + to_string(_x)
+							 + ":" + to_string(_l) + "-" + to_string(_dir);
+	etools::log_add(msg);
 	
-	while(get_tile(y, x).get_ispassable()){
+	if(_l == 0){return Coord2(_y, _x);}
+	
+	// for now, there are 4 cardinal numpad direcrtions allowed - 8, 6, 2, 4
+	if(_dir > 6) {_dir = 8;}
+	else if(_dir > 4 && _dir < 7) {_dir = 6;}
+	else if(_dir > 2 && _dir < 5) {_dir = 4;}
+	else {_dir = 2;}
+	
+	//set the real starting point of corridor
+	while(get_tile(_y, _x).get_ispassable()){
 		switch(_dir){
-			case 8: y--; break;
-			case 6: x++; break;
-			case 2: y++; break;
-			case 4: x--; break;
-			default: return;
+			case 8: _y--; break;
+			case 6: _x++; break;
+			case 2: _y++; break;
+			case 4: _x--; break;
+			default: etools::log_add("ERROR: make_corr: invalid direction argument");
+				return Coord2(_y, _x);
+		}
+		//out of bounds guards
+		if(_y == 0 && _dir == 8) {
+			etools::log_add("Corr start OOB guard");
+			return Coord2(_y, _x);
+		}
+		if(_x == 0 && _dir == 4) {
+			etools::log_add("Corr start OOB guard");
+			return Coord2(_y, _x);
 		}
 	}
-	
+
+	//place corridor on map
 	while(left > 0){
-		place_tile(y, x, new Tile_Empty);
+		place_tile(_y, _x, new Tile_Empty);
 		left--;
+		//place walls if target tile is not passable (e.g. not generated yet)
+		if(_dir == 2 || _dir == 8){
+			if(!get_tile(_y,_x - 1).get_ispassable()){
+				place_tile(_y, _x - 1, new Tile_Wall);
+			}
+			if(!get_tile(_y,_x + 1).get_ispassable()){
+				place_tile(_y, _x + 1, new Tile_Wall);
+			}
+		}
+		else if(_dir == 4 || _dir == 6){
+			if(!get_tile(_y - 1, _x).get_ispassable()){
+				place_tile(_y - 1, _x, new Tile_Wall);
+			}
+			if(!get_tile(_y + 1, _x).get_ispassable()){
+				place_tile(_y + 1, _x, new Tile_Wall);
+			}
+		}
+		
+		if(left == 0) {return Coord2(_y, _x);}
+		
 		switch(_dir){
-			case 8: y--; break;
-			case 6: x++; break;
-			case 2: y++; break;
-			case 4: x--; break;
-			default: return;
+			case 8: _y--; break;
+			case 6: _x++; break;
+			case 2: _y++; break;
+			case 4: _x--; break;
+			default: etools::log_add("ERROR: make_corr: invalid direction argument");
+				return Coord2(_y, _x);
+		}
+		//out of bounds guards (+1 margin for wall placement)
+		if(_y < 1 && _dir == 8){
+			_y = 1;
+			left = 0;
+			etools::log_add("Corr OOB guard");
+			return Coord2(_y, _x);
+		}
+		if(_x < 1 && _dir == 4){
+			_x = 1;
+			left = 0;
+			etools::log_add("Corr OOB guard");
+			return Coord2(_y, _x);
 		}
 	}
+	
+	// return the endpoint coordinates
+	return Coord2(_y, _x);
 }
 
 
@@ -205,19 +302,16 @@ void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
 	
 	//while the row is too short to place our tile just after it's end - extend
 	while(m_tiles[_y].size() < _x){
-		mvprintw(0,0, "padding row...               ");refresh();//debug
+		//etools::log_add("padding row...");//debug
 		m_tiles[_y].push_back(new Tile);
-		mvprintw(0,40, "row padded ");//debug
-		refresh();//debug
+		//etools::log_add("row padded ");//debug
 	}
 	
 	//if we are to place the tile just after the end of the row - add the tile
-	mvprintw(0,0, "adding at end...            ");//debug
-	refresh();//debug
+	//etools::log_add("adding at end...");//debug
 	if(m_tiles[_y].size() == _x){
 		m_tiles[_y].push_back(_tl);
-		mvprintw(0,40, "tile placed.  ");//debug
-		refresh(); //debug
+		//etools::log_add("tile placed.");//debug
 		if(m_tilemap_w <= _x){//register new map width if the map has expanded
 			m_tilemap_w = _x + 1;
 		}
@@ -228,9 +322,7 @@ void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
 int Map::add_actr(Actor* _a)
 {
 	if(get_tiles_h() < 1 || get_tiles_w() < 1) {
-		mvprintw(0, 0, "WARNING: can't place actor on empty map.");
-		refresh();
-		getch();
+		etools::log_add("WARNING: can't place actor on empty map.");
 		return 1;
 	}
 	
@@ -304,7 +396,7 @@ int Map::add_actr(Actor* _a)
 		}
 	}
 	
-	mvprintw(0, 0, "Couldn't find a passable tile to place actor!"); refresh();
+	etools::log_add("Couldn't find a passable tile to place actor!");
 	return -1;
 }
 

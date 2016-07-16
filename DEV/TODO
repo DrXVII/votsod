@@ -1,8 +1,16 @@
+2016-07-14
+- [ ] rename Tile_Empty class into Tile_Floor to better represent it's
+functionality.
+- [?] maybe return a trully Tile_Empty when get_tile tries to probe a non
+existant tile? (would require creating Tile_Empty as a special tile type)
 2016-06-20
-- [ ] finish implementing random level generation
--- [ ] generate a corridor to random direction and room at the end of it
--- [ ] generate corridor walls
+- [ ] fix quirks in random level generation
+-- [x] inaccessible rooms
+-- [ ] random crashing
 2016-06-19
+- [ ] finish implementing random level generation
+-- [x] generate a corridor to random direction and room at the end of it
+-- [ ] generate corridor walls
 - [ ] implement a logfile for debugging (instead of random prints)
 2016-05-15
 - continue implementing random level generation
@@ -11,6 +19,6 @@
 non-existent tiles
 -- [x] implement the "random" in random room generator
 -- [x] generate walls around random rooms
--- generate corridors and chance (9/10?) of room at the end of each corridor
+-- [ ] generate corridors and chance (9/10?) of room at the end of each corridor
 2016-05-09
-- Change actor and item arrays to the list type (see unorderd list aswell);
+- [ ] Change actor and item arrays to the list type (see unorderd list aswell);

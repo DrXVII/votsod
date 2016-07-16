@@ -5,7 +5,8 @@ obj = main.o \
 	Actor.o Actor_Human.o Actor_Watcher.o \
 	Map.o \
 	Tile.o Tile_Empty.o Tile_Wall.o \
-	Viewport.o System.o
+	Viewport.o System.o \
+	etools.o
 binDir = bin/
 hDir = include
 
