@@ -251,3 +251,12 @@ BTW the time is actually 13:32:44, the system time is off since i'm working in a
 Session time: 00:37:56
 Project time: 2d. 15:20:04
 
+[NEW SESSION] : 2016-07-16[14:04:15]Saturday
+[14:04:33] Implemented a debug log functionality.
+[14:05:21] Solved the random crashing issue. There were two problems causing thi
+s, took me some time to realise. But the new logging functionality made things m
+uch clearer.
+[END OF SESSION] : 2016-07-16[14:07:15]Saturday
+Session time: 05:03:00
+Project time: 2d. 20:23:04
+

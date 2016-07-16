@@ -11,6 +11,7 @@
 /*TODO - due to different arrays containing items to be seen, consider
 implementing a screen buffer instead of several print passes.*/
 //TODO - destructors for classes storing objects in the heap (e.g. Map class)
+//TODO - levels of debug logging verbocity (e.g. via a config file)
 
 //core libraries
 #include <string>
@@ -33,10 +34,13 @@ void endgame();
 void goodbye();
 void print_cen(int _ln, const string& _s);//prints _s centered on line _ln
 
+
 int main()
 {
 	int cmd = ' ';
-
+	
+	etools::log_new_session();
+	
 	init_ncurses();
 	wellcome();
 	start(cmd);
@@ -49,9 +53,9 @@ int main()
 void start(int _cmd)
 {
 	System gamesys;
-	mvprintw(0, 0, "initialising game system                      "); refresh();
+	etools::log_add("initialising game system");
 	gamesys.init();
-	mvprintw(0, 0, "adding actors                                 "); refresh();
+	etools::log_add("adding actors");
 	gamesys.add_actr(new Actor_Human(2, 2));
 	
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
