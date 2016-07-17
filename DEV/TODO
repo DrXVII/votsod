@@ -4,14 +4,14 @@ functionality.
 - [?] maybe return a trully Tile_Empty when get_tile tries to probe a non
 existant tile? (would require creating Tile_Empty as a special tile type)
 2016-06-20
-- [ ] fix quirks in random level generation
+- [x] fix quirks in random level generation
 -- [x] inaccessible rooms
--- [ ] random crashing
+-- [x] random crashing
 2016-06-19
-- [ ] finish implementing random level generation
+- [x] finish implementing random level generation
 -- [x] generate a corridor to random direction and room at the end of it
--- [ ] generate corridor walls
-- [ ] implement a logfile for debugging (instead of random prints)
+-- [x] generate corridor walls
+- [x] implement a logfile for debugging (instead of random prints)
 2016-05-15
 - continue implementing random level generation
 -- [x] test the placement of a random tile outside of the generated room

@@ -4,8 +4,8 @@ version 0.1
 - [x] At least one type of mob
 - [x] Simple "homming" mob AI
 - [x] basic UI: most important stats visible on the main screen sidebar (hp)
-- Random level generation: one randomly generated map
-- Line of sight for the player (altered by obstructions)
+- [ ] Random level generation: one randomly generated map
+- [ ] Line of sight for the player (altered by obstructions)
 - [x] simpe (only DMG based) combat
 
 verion 0.2

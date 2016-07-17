@@ -8,8 +8,8 @@
 -- [x] core mechanics
 -- [x] basic AI/mobs
 -- [x]basic UI
-- basic random level generation
-- line of sight
+- [ ] basic random level generation
+- [ ] line of sight
 
 === Steps ======================================================================
 # [x] Organise project repository
@@ -50,25 +50,28 @@
 -- [x] Char array in map should contain the main character as well
 -- [x] reconfigure viewport accordingly
 
-## basic AI/mobs
-- basic mobs
+## [x] basic AI/mobs
+- [x] basic mobs
 -- [x] introduce an AI-less mob (let's consider it a training dummy :D )
 -- [x] implement basic mob AI (only homing for now)
 
-## basic UI
+## [x] basic UI
 - [x] display hp (later other common information) on the sidebar
-- ability to check stats (suggestion: map to 'c')
 
-## basic random level generation
+## [ ] basic random level generation
 - generate a random level (for now some generic rooms connected with corridors)
 -- [x] room generation
 -- [x] radnomise room generation
--- random corridors, most leading to a room
--- level feature overlapping prevention
+-- [ ] random corridors, most leading to a room
+--- [x] random corridor passageway
+--- [x] corridor walls
+--- [ ] bending corridors
+-- [x] level feature overlapping prevention
+-- [x] ensure level element accessability
 
-## line of sight
-- basic line of sight (no worries about obstacles for now)
--- player (render only visible tiles)
--- mob AI behaviour
+## [ ] line of sight
+- [ ] basic line of sight (no worries about obstacles for now)
+-- [ ] player (render only visible tiles)
+-- [ ] mob AI behaviour
 
 === Ideas ======================================================================
