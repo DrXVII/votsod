@@ -108,6 +108,7 @@ void Map::gen_lev()
 	std::uniform_int_distribution<int> posd(0, 99);
 	std::uniform_int_distribution<int> sized(4, 10);
 	std::uniform_int_distribution<int> dird(1, 8);
+	std::uniform_int_distribution<int> d10(1, 10);
 	
 	vector<Coord2> rctrs; //room centerpoints
 	vector<Coord2> cends; //corridor endpoints
@@ -140,9 +141,27 @@ void Map::gen_lev()
 				unsigned cor_y = rctrs[rcp].y;
 				unsigned cor_x = rctrs[rcp].x;
 				unsigned cor_l = sized(gen);
-
+				
 				cends.push_back(make_corr(cor_y, cor_x, cor_l, cor_d));
-				etools::log_add("corr endpoint: " + to_string(cends.back().y) + "/" + to_string(cends.back().x));
+				
+				//winding corridor generation
+				unsigned itr1 = 0;
+				while(1){
+					itr1++;
+					//decide if corridor will bend, and generate section if so
+					if(d10(gen) >= 6){
+						bool cor_corner = true;
+						cor_y = cends.back().y;
+						cor_x = cends.back().x;
+						cor_l = sized(gen);
+						cor_d = dird(gen);
+						cends.push_back(make_corr(cor_y, cor_x, cor_l, cor_d, cor_corner));
+					}
+					else {break;}
+					if(itr1 > 10) {etools::log_add("Long loop in lev_gen (corridor)");}
+				}
+				etools::log_add("corr endpoint: " + to_string(cends.back().y) + "/"
+												+ to_string(cends.back().x));
 			}
 			//allign room placement to the endpoint of most recently created corridor
 			rm_x = cends.back().x;
@@ -196,9 +215,11 @@ Coord2 Map::make_room(const unsigned& _y, const unsigned& _x,
 }
 
 Coord2 Map::make_corr(unsigned _y, unsigned _x,
-										const unsigned& _l, unsigned _dir)
+											const unsigned& _l, unsigned _dir,
+											const bool& _corner)
 {
 	unsigned left = _l;
+	bool end_of_corr = false;
 
 	string msg = "making corr " + to_string(_y) + "/" + to_string(_x)
 							 + ":" + to_string(_l) + "-" + to_string(_dir);
@@ -233,29 +254,76 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 		}
 	}
 
+	// walls around the entry point (to wall corridor corners at bends)
+	if(_corner == true){
+		if(_dir == 2){
+			if(get_tile(_y - 1, _x + 1).get_ispassable() == false){
+				place_tile(_y - 1, _x + 1, new Tile_Wall);
+			}
+			if(get_tile(_y - 1, _x - 1).get_ispassable() == false){
+				place_tile(_y - 1, _x - 1, new Tile_Wall);
+			}
+		}
+		if(_dir == 4){
+			if(get_tile(_y - 1, _x + 1).get_ispassable() == false){
+				place_tile(_y - 1, _x + 1, new Tile_Wall);
+			}
+			if(get_tile(_y + 1, _x + 1).get_ispassable() == false){
+				place_tile(_y + 1, _x + 1, new Tile_Wall);
+			}
+		}
+		if(_dir == 6){
+			if(get_tile(_y - 1, _x - 1).get_ispassable() == false){
+				place_tile(_y - 1, _x - 1, new Tile_Wall);
+			}
+			if(get_tile(_y + 1, _x - 1).get_ispassable() == false){
+				place_tile(_y + 1, _x - 1, new Tile_Wall);
+			}
+		}
+		if(_dir == 8){
+			if(get_tile(_y + 1, _x + 1).get_ispassable() == false){
+				place_tile(_y + 1, _x + 1, new Tile_Wall);
+			}
+			if(get_tile(_y + 1, _x - 1).get_ispassable() == false){
+				place_tile(_y + 1, _x - 1, new Tile_Wall);
+			}
+		}
+	}
+		
 	//place corridor on map
 	while(left > 0){
-		place_tile(_y, _x, new Tile_Empty);
+		if(end_of_corr){
+			place_tile(_y, _x, new Tile_Wall);
+		}
+		else{
+			place_tile(_y, _x, new Tile_Empty);
+		}
 		left--;
 		//place walls if target tile is not passable (e.g. not generated yet)
 		if(_dir == 2 || _dir == 8){
-			if(!get_tile(_y,_x - 1).get_ispassable()){
+			if(get_tile(_y,_x - 1).get_ispassable() == false){
 				place_tile(_y, _x - 1, new Tile_Wall);
 			}
-			if(!get_tile(_y,_x + 1).get_ispassable()){
+			if(get_tile(_y,_x + 1).get_ispassable() == false){
 				place_tile(_y, _x + 1, new Tile_Wall);
 			}
 		}
 		else if(_dir == 4 || _dir == 6){
-			if(!get_tile(_y - 1, _x).get_ispassable()){
+			if(get_tile(_y - 1, _x).get_ispassable() == false){
 				place_tile(_y - 1, _x, new Tile_Wall);
 			}
-			if(!get_tile(_y + 1, _x).get_ispassable()){
+			if(get_tile(_y + 1, _x).get_ispassable() == false){
 				place_tile(_y + 1, _x, new Tile_Wall);
 			}
 		}
 		
-		if(left == 0) {return Coord2(_y, _x);}
+		//cap the end with walls and return when done
+		if(end_of_corr){
+			return Coord2(_y, _x);
+		}
+		if(left == 0){
+				end_of_corr = true;
+		}
 		
 		switch(_dir){
 			case 8: _y--; break;
@@ -266,15 +334,19 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 				return Coord2(_y, _x);
 		}
 		//out of bounds guards (+1 margin for wall placement)
-		if(_y < 1 && _dir == 8){
+		if(_y < 2 && _dir == 8){
 			_y = 1;
-			left = 0;
+			place_tile(_x, _y, new Tile_Wall);
+			place_tile(_x + 1, _y, new Tile_Wall);
+			place_tile(_x - 1, _y, new Tile_Wall);
 			etools::log_add("Corr OOB guard");
 			return Coord2(_y, _x);
 		}
-		if(_x < 1 && _dir == 4){
+		if(_x < 2 && _dir == 4){
 			_x = 1;
-			left = 0;
+			place_tile(_x, _y, new Tile_Wall);
+			place_tile(_x, _y + 1, new Tile_Wall);
+			place_tile(_x, _y - 1, new Tile_Wall);
 			etools::log_add("Corr OOB guard");
 			return Coord2(_y, _x);
 		}

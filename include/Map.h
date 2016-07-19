@@ -34,7 +34,9 @@ public:
 	void gen_lev();
 	Coord2 make_room(const unsigned& _y, const unsigned& _x,
 									 const unsigned& _w, const unsigned& _l);
-	Coord2 make_corr(unsigned _y, unsigned _x, const unsigned& _l, unsigned _dir);
+	Coord2 make_corr(unsigned _y, unsigned _x,
+									 const unsigned& _l, unsigned _dir,
+									 const bool& = false);
 	void place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl);
 	int add_actr(Actor* _a);
 	int start_turn();
