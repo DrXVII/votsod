@@ -121,13 +121,10 @@ void Map::gen_lev()
 		int rm_x = posd(gen); //x of room's upper left corner
 		int rm_w = sized(gen); //room's width
 		int rm_l = sized(gen); //room's length
-		int cor_d = dird(gen); //corridor direction
+		char cor_d = dird(gen); //corridor direction
 		
 		//for now, only the 4 cardinal numpad direcrtions are allowed - 8, 6, 2, 4
-		if(cor_d > 6) {cor_d = 8;}
-		else if(cor_d > 4 && cor_d < 7) {cor_d = 6;}
-		else if(cor_d > 2 && cor_d < 5) {cor_d = 4;}
-		else {cor_d = 2;}
+		cor_d = norm_card_dir(cor_d);
 		
 		//if no rooms are present yet - make the first one before making corridors
 		if(rctrs.size() == 0){
@@ -151,10 +148,27 @@ void Map::gen_lev()
 					//decide if corridor will bend, and generate section if so
 					if(d10(gen) >= 6){
 						bool cor_corner = true;
+						bool backtracking = false;
+						char old_cor_d = cor_d;
 						cor_y = cends.back().y;
 						cor_x = cends.back().x;
 						cor_l = sized(gen);
-						cor_d = dird(gen);
+						cor_d = norm_card_dir(dird(gen));
+						
+						//reroll cor_d if current cor_d would cause backtracking
+						switch(cor_d){
+							case 2: if(old_cor_d == 8) {backtracking = true;} break;
+							case 4: if(old_cor_d == 6) {backtracking = true;} break;
+							case 6: if(old_cor_d == 4) {backtracking = true;} break;
+							case 8: if(old_cor_d == 2) {backtracking = true;} break;
+						}
+						if(backtracking){
+							char bad_cor_d = cor_d;
+							while(cor_d == bad_cor_d){
+								cor_d = norm_card_dir(dird(gen));
+							}
+						}
+						
 						cends.push_back(make_corr(cor_y, cor_x, cor_l, cor_d, cor_corner));
 					}
 					else {break;}
@@ -166,7 +180,7 @@ void Map::gen_lev()
 			//allign room placement to the endpoint of most recently created corridor
 			rm_x = cends.back().x;
 			rm_y = cends.back().y;
-			switch(cor_d){
+			switch(norm_card_dir(cor_d)){
 				case 8: rm_y -= (rm_l - 1); rm_x -= (rm_w - 1) / 2; break;
 				case 6: rm_y -= (rm_l - 1) / 2; break;
 				case 2: rm_x -= (rm_w - 1) / 2; break;
@@ -228,64 +242,36 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 	if(_l == 0){return Coord2(_y, _x);}
 	
 	// for now, there are 4 cardinal numpad direcrtions allowed - 8, 6, 2, 4
-	if(_dir > 6) {_dir = 8;}
-	else if(_dir > 4 && _dir < 7) {_dir = 6;}
-	else if(_dir > 2 && _dir < 5) {_dir = 4;}
-	else {_dir = 2;}
+	_dir = norm_card_dir(_dir);
 	
+	if(_corner == false){
 	//set the real starting point of corridor
-	while(get_tile(_y, _x).get_ispassable()){
-		switch(_dir){
-			case 8: _y--; break;
-			case 6: _x++; break;
-			case 2: _y++; break;
-			case 4: _x--; break;
-			default: etools::log_add("ERROR: make_corr: invalid direction argument");
+		while(get_tile(_y, _x).get_ispassable()){
+			switch(_dir){
+				case 8: _y--; break;
+				case 6: _x++; break;
+				case 2: _y++; break;
+				case 4: _x--; break;
+				default: etools::log_add("ERROR: make_corr: invalid direction argument");
+					return Coord2(_y, _x);
+			}
+			//out of bounds guards
+			if(_y == 0 && _dir == 8) {
+				etools::log_add("Corr start OOB guard");
 				return Coord2(_y, _x);
-		}
-		//out of bounds guards
-		if(_y == 0 && _dir == 8) {
-			etools::log_add("Corr start OOB guard");
-			return Coord2(_y, _x);
-		}
-		if(_x == 0 && _dir == 4) {
-			etools::log_add("Corr start OOB guard");
-			return Coord2(_y, _x);
+			}
+			if(_x == 0 && _dir == 4) {
+				etools::log_add("Corr start OOB guard");
+				return Coord2(_y, _x);
+			}
 		}
 	}
 
+	if(_corner){
 	// walls around the entry point (to wall corridor corners at bends)
-	if(_corner == true){
-		if(_dir == 2){
-			if(get_tile(_y - 1, _x + 1).get_ispassable() == false){
-				place_tile(_y - 1, _x + 1, new Tile_Wall);
-			}
-			if(get_tile(_y - 1, _x - 1).get_ispassable() == false){
-				place_tile(_y - 1, _x - 1, new Tile_Wall);
-			}
-		}
-		if(_dir == 4){
-			if(get_tile(_y - 1, _x + 1).get_ispassable() == false){
-				place_tile(_y - 1, _x + 1, new Tile_Wall);
-			}
-			if(get_tile(_y + 1, _x + 1).get_ispassable() == false){
-				place_tile(_y + 1, _x + 1, new Tile_Wall);
-			}
-		}
-		if(_dir == 6){
-			if(get_tile(_y - 1, _x - 1).get_ispassable() == false){
-				place_tile(_y - 1, _x - 1, new Tile_Wall);
-			}
-			if(get_tile(_y + 1, _x - 1).get_ispassable() == false){
-				place_tile(_y + 1, _x - 1, new Tile_Wall);
-			}
-		}
-		if(_dir == 8){
-			if(get_tile(_y + 1, _x + 1).get_ispassable() == false){
-				place_tile(_y + 1, _x + 1, new Tile_Wall);
-			}
-			if(get_tile(_y + 1, _x - 1).get_ispassable() == false){
-				place_tile(_y + 1, _x - 1, new Tile_Wall);
+		for(unsigned i = 0; i < 3; i++){
+			for(unsigned j = 0; j < 3; j++){
+				place_tile_if_empty(_y - 1 + i, _x - 1 + j, new Tile_Wall);
 			}
 		}
 	}
@@ -301,20 +287,12 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 		left--;
 		//place walls if target tile is not passable (e.g. not generated yet)
 		if(_dir == 2 || _dir == 8){
-			if(get_tile(_y,_x - 1).get_ispassable() == false){
-				place_tile(_y, _x - 1, new Tile_Wall);
-			}
-			if(get_tile(_y,_x + 1).get_ispassable() == false){
-				place_tile(_y, _x + 1, new Tile_Wall);
-			}
+			place_tile_if_empty(_y, _x - 1, new Tile_Wall);
+			place_tile_if_empty(_y, _x + 1, new Tile_Wall);
 		}
 		else if(_dir == 4 || _dir == 6){
-			if(get_tile(_y - 1, _x).get_ispassable() == false){
-				place_tile(_y - 1, _x, new Tile_Wall);
-			}
-			if(get_tile(_y + 1, _x).get_ispassable() == false){
-				place_tile(_y + 1, _x, new Tile_Wall);
-			}
+			place_tile_if_empty(_y - 1, _x, new Tile_Wall);
+			place_tile_if_empty(_y + 1, _x, new Tile_Wall);
 		}
 		
 		//cap the end with walls and return when done
@@ -356,6 +334,18 @@ Coord2 Map::make_corr(unsigned _y, unsigned _x,
 	return Coord2(_y, _x);
 }
 
+char Map::norm_card_dir(const char& _dir)
+{
+	char ret = 0;
+	
+	if(_dir > 6) {ret = 8;}
+	else if(_dir > 4 && _dir < 7) {ret = 6;}
+	else if(_dir > 2 && _dir < 5) {ret = 4;}
+	else {ret = 2;}
+	
+	return ret;
+}
+
 
 void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
 {	
@@ -388,6 +378,13 @@ void Map::place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl)
 			m_tilemap_w = _x + 1;
 		}
 		return;
+	}
+}
+
+void Map::place_tile_if_empty(unsigned const& _y, unsigned const& _x, Tile* _tl)
+{	
+	if(get_tile(_y, _x).get_ispassable() == false){
+		place_tile(_y, _x, _tl);
 	}
 }
 

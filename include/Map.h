@@ -37,7 +37,9 @@ public:
 	Coord2 make_corr(unsigned _y, unsigned _x,
 									 const unsigned& _l, unsigned _dir,
 									 const bool& = false);
+	char norm_card_dir(const char& _dir);//normalise cardinal direction to 2|4|6|8
 	void place_tile(unsigned const& _y, unsigned const& _x, Tile* _tl);
+	void place_tile_if_empty(unsigned const& _y, unsigned const& _x, Tile* _tl);
 	int add_actr(Actor* _a);
 	int start_turn();
 	void atk(Actor* _att, Actor* _def);

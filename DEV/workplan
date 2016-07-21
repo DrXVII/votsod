@@ -65,7 +65,8 @@
 -- [ ] random corridors, most leading to a room
 --- [x] random corridor passageway
 --- [x] corridor walls
---- [ ] bending corridors
+--- [x] bending corridors
+--- [ ] 9/10 chance of a room at the end of corridor
 -- [x] level feature overlapping prevention
 -- [x] ensure level element accessability
 
