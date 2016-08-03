@@ -1,28 +1,31 @@
-version 0.1
------------
+[ ] version 0.01
+----------------
 - [x] Support for maps larger than the screen (camera moves with the player)
 - [x] At least one type of mob
 - [x] Simple "homming" mob AI
 - [x] basic UI: most important stats visible on the main screen sidebar (hp)
 - [ ] Random level generation: one randomly generated map
-- [ ] Line of sight for the player (altered by obstructions)
 - [x] simpe (only DMG based) combat
 
-verion 0.2
-----------
-- improved UI: (in the form of view charsheet (button 'c'))
-- mob AI line of sight (common default value for now)
-- A* pathfinding for AI
-- combat: add skills to combat calculations: think of dodging, to hit chance, toughness
-- combat: calculations influenced by RNG
-- combat: add crit fail and crit success
+verion 0.02 (reevaluation needed -maybe move some things to 0.03, change others)
+-----------
+- [ ] Simple line of sight for the player (unaltered by obstructions for now)
+- [ ] UI: view charsheet (button 'c')
+- [ ] UI: events and text area
+- [ ] mob AI simple line of sight (common default value for now)
+- [ ] A* pathfinding for AI
+- [ ] combat: add skills to combat calculations: think of dodging, to hit chance, toughness
+- [ ] combat: calculations influenced by RNG
+- [ ] combat: add crit fail and crit success
 
 ----------------------
 other planned features
 ----------------------
-(in a rough and boud to change order of priority)
-- levels of randomly generated maps connected by i.e. staircases
+(in a rough and bound to change order of priority)
+(might be necessary to split some topics into more smaller/narrower ones)
+- levels of randomly generated maps connected by e.g. staircases
 - doors
+- fully integrated line of sight for player and AI
 - projectile weapons
 - projectile mobs
 - wearables
@@ -30,9 +33,22 @@ other planned features
 - weildables
 - traps
 - disarming traps (think of more activities affected by skill + RNG)
+- chasms, bridges, ledges and jumping over them (agility? dexterity?)
+  (some areas unreachable when encumbered, player would have to leave stuff)
+  (allso would present utility for some spells and equipment)
 - flying mobs
+- rooms with specific effects, events, purpose, etc...
 - maps generated in a theme conformant fashion depending on locale
+- player and AI perception using other senses than sight (hearing, smell?)
+
+votsod II (or 2.xx.x?)
+---------
 - open(ish) world
 - two interwoven dimensions (one affects the other in some way)
-- basic perception mechanics for player and mobs
-- rooms with specific effects, events, purpose, etc...
+- spirit mode
+- home / place to stay
+- means of transportation
+- weather
+- money
+- job / missions / contracts
+- cost of living

@@ -1,5 +1,7 @@
-=== Objectives =================================================================
-(to reach version 0.01.0)
+#############################
+OBJECTIVES FOR VERSION 0.01.0
+#############################
+
 - [x] Organise project repository
 - [x] Create an initial design for the engine core
 - [x] Refactor and review old code
@@ -7,13 +9,18 @@
 -- [x] housekeeping
 -- [x] core mechanics
 -- [x] basic AI/mobs
--- [x]basic UI
+-- [x] basic UI
+-- [x] debug log functionality
 - [ ] basic random level generation
-- [ ] line of sight
+- [ ] take care of lose ends (TODO)
 
-=== Steps ======================================================================
-# [x] Organise project repository
----------------------------------
+=====
+Steps
+=====
+
+-------------------------------
+[x] Organise project repository
+-------------------------------
 - [x] check and throw out the unnecessary doc files left over form asciiworld
 -- [x] text docs, ideas, etc
 -- [x] xmind project maps
@@ -22,25 +29,28 @@
 -- [x] deicide on the repo structure
 -- [x] create a makefile
 
-# [x] Create an initial design for the engine core
---------------------------------------------------
+------------------------------------------------
+[x] Create an initial design for the engine core
+------------------------------------------------
 - [x] create a basic dia diagram to have a visualisation and work from there
 
-# [x] Refactor and review old code
-----------------------------------
+--------------------------------
+[x] Refactor and review old code
+--------------------------------
 - [x] refactor code distribution to comply with K&R-Stroustrup style
 - [x] refactor naming to comply with K&R-Stroustrup style
 - [x] review the code and remember the old work and loose ends
 
-# [x] Flesh out engine core
----------------------------
+-------------------------
+[x] Flesh out engine core
+-------------------------
 (the idea is to make a reusable engine skeleton)
 
-## [x] housekeeping
+# [x] housekeeping
 - [x] refactor code. The current style is inconsistent and quite far from ISO,
 	which suggests K&R
 
-## [x] core mechanics
+# [x] core mechanics
 - [x] reintroduce wall collisions
 -- [x] create a System class to serve as higher level handler of procesess
 -- [x] implement actor movement handling in the Map class
@@ -50,18 +60,22 @@
 -- [x] Char array in map should contain the main character as well
 -- [x] reconfigure viewport accordingly
 
-## [x] basic AI/mobs
+# [x] basic AI/mobs
 - [x] basic mobs
 -- [x] introduce an AI-less mob (let's consider it a training dummy :D )
 -- [x] implement basic mob AI (only homing for now)
 
-## [x] basic UI
+# [x] basic UI
 - [x] display hp (later other common information) on the sidebar
 
-## [ ] basic random level generation
-- generate a random level (for now some generic rooms connected with corridors)
+# [x] debug log functionality
+
+---------------------------------
+[ ] basic random level generation
+---------------------------------
+- generate a random level (for now just some rooms connected with corridors)
 -- [x] room generation
--- [x] radnomise room generation
+-- [x] randomise room generation
 -- [ ] random corridors, most leading to a room
 --- [x] random corridor passageway
 --- [x] corridor walls
@@ -70,9 +84,25 @@
 -- [x] level feature overlapping prevention
 -- [x] ensure level element accessability
 
-## [ ] line of sight
-- [ ] basic line of sight (no worries about obstacles for now)
--- [ ] player (render only visible tiles)
--- [ ] mob AI behaviour
-
-=== Ideas ======================================================================
+---------------------------------
+[ ] take care of lose ends (TODO)
+---------------------------------
+- [ ] rename Tile_Empty class into Tile_Floor to better represent it's
+  functionality.
+- [ ] return a trully Tile_Empty when get_tile tries to probe a non
+  existant tile (create Tile_Empty as a special tile type)
+- [x] fix quirks in random level generation
+-- [x] inaccessible rooms
+-- [x] random crashing
+- [x] finish implementing random level generation
+-- [x] generate a corridor to random direction and room at the end of it
+-- [x] generate corridor walls
+- [x] implement a logfile for debugging (instead of random prints)
+- continue implementing random level generation
+-- [x] test the placement of a random tile outside of the generated room
+-- [x] modify actor placement logic to prevent placing actors on impassable or
+   non-existent tiles
+-- [x] implement the "random" in random room generator
+-- [x] generate walls around random rooms
+-- [ ] generate corridors and chance (9/10) of room at the end of each corridor
+- [ ] Change actor and item arrays to the list type (see unorderd list as well)
