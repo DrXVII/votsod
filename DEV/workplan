@@ -1,4 +1,17 @@
 #############################
+OBJECTIVES FOR VERSION 0.02.0
+#############################
+- Prepare the system design for further development.
+- [ ] rename Tile_Empty class into Tile_Floor to better represent it's
+  functionality.
+- [ ] return a trully Tile_Empty when get_tile tries to probe a non
+  existant tile (create Tile_Empty as a special tile type)
+- [ ] use smart arrays instead of raw arrays
+- [ ] optimise vector array handling for random access object deletion
+  (i.e. destroy the object in the vector and move the one at the end as opposed
+  to rearranging the entire vector... maybe there's a better solution)
+
+#############################
 OBJECTIVES FOR VERSION 0.01.0
 #############################
 
@@ -11,8 +24,8 @@ OBJECTIVES FOR VERSION 0.01.0
 -- [x] basic AI/mobs
 -- [x] basic UI
 -- [x] debug log functionality
-- [ ] basic random level generation
-- [ ] take care of lose ends (TODO)
+- [x] basic random level generation
+- [x] take care of lose ends (TODO)
 
 =====
 Steps
@@ -71,26 +84,22 @@ Steps
 # [x] debug log functionality
 
 ---------------------------------
-[ ] basic random level generation
+[x] basic random level generation
 ---------------------------------
 - generate a random level (for now just some rooms connected with corridors)
 -- [x] room generation
 -- [x] randomise room generation
--- [ ] random corridors, most leading to a room
+-- [x] random corridors, most leading to a room
 --- [x] random corridor passageway
 --- [x] corridor walls
 --- [x] bending corridors
---- [ ] 9/10 chance of a room at the end of corridor
+--- [x] 9/10 chance of a room at the end of corridor
 -- [x] level feature overlapping prevention
 -- [x] ensure level element accessability
 
 ---------------------------------
-[ ] take care of lose ends (TODO)
+[x] take care of lose ends (TODO)
 ---------------------------------
-- [ ] rename Tile_Empty class into Tile_Floor to better represent it's
-  functionality.
-- [ ] return a trully Tile_Empty when get_tile tries to probe a non
-  existant tile (create Tile_Empty as a special tile type)
 - [x] fix quirks in random level generation
 -- [x] inaccessible rooms
 -- [x] random crashing
@@ -104,5 +113,3 @@ Steps
    non-existent tiles
 -- [x] implement the "random" in random room generator
 -- [x] generate walls around random rooms
--- [ ] generate corridors and chance (9/10) of room at the end of each corridor
-- [ ] Change actor and item arrays to the list type (see unorderd list as well)

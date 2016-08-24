@@ -177,25 +177,28 @@ void Map::gen_lev()
 				etools::log_add("corr endpoint: " + to_string(cends.back().y) + "/"
 												+ to_string(cends.back().x));
 			}
-			//allign room placement to the endpoint of most recently created corridor
-			rm_x = cends.back().x;
-			rm_y = cends.back().y;
-			switch(norm_card_dir(cor_d)){
-				case 8: rm_y -= (rm_l - 1); rm_x -= (rm_w - 1) / 2; break;
-				case 6: rm_y -= (rm_l - 1) / 2; break;
-				case 2: rm_x -= (rm_w - 1) / 2; break;
-				case 4: rm_x -= (rm_w - 1); rm_y -= (rm_l - 1) / 2; break;
+			// 9/10 chance of a room at the end of the mos recent corridor
+			if(d10(gen) < 10) {
+				//allign room placement to the endpoint of most recent corridor
+				rm_x = cends.back().x;
+				rm_y = cends.back().y;
+				switch(norm_card_dir(cor_d)){
+					case 8: rm_y -= (rm_l - 1); rm_x -= (rm_w - 1) / 2; break;
+					case 6: rm_y -= (rm_l - 1) / 2; break;
+					case 2: rm_x -= (rm_w - 1) / 2; break;
+					case 4: rm_x -= (rm_w - 1); rm_y -= (rm_l - 1) / 2; break;
+				}
+				//out of bounds guards
+				if(rm_y < 0 || rm_x < 0) {
+					etools::log_add("WARNING: gen_lev() alligned room out of bounds.");
+					cends.pop_back(); //removing node that's too close to the border
+					if(i > 0) {i--;}
+					continue;
+				}
+				rctrs.push_back(make_room(rm_y, rm_x, rm_w, rm_l));
+				//make entrance to new room at the end of most recently created corridor
+				place_tile(cends.back().y, cends.back().x, new Tile_Empty);
 			}
-			//out of bounds guards
-			if(rm_y < 0 || rm_x < 0) {
-				etools::log_add("WARNING: gen_lev() alligned room out of bounds.");
-				cends.pop_back(); //removing node that's too close to the border
-				if(i > 0) {i--;}
-				continue;
-			}
-			rctrs.push_back(make_room(rm_y, rm_x, rm_w, rm_l));
-			//make entrance to new room at the end of most recently created corridor
-			place_tile(cends.back().y, cends.back().x, new Tile_Empty);
 		}
 	}
 	etools::log_add("level generated (" + to_string(get_tiles_w())

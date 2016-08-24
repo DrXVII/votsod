@@ -6,12 +6,12 @@
  *******************************************************************************
 */
 
-/*TODO store map objects and actors in a "list" array (vector's gonna get slow
- * here)*/
-/*TODO - due to different arrays containing items to be seen, consider
+/*TODO otpimise array handling when deleting "actors" and "objects"*/
+/*TODO - due to several arrays containing items to be seen, consider
 implementing a screen buffer instead of several print passes.*/
 //TODO - destructors for classes storing objects in the heap (e.g. Map class)
 //TODO - levels of debug logging verbocity (e.g. via a config file)
+//TODO - change raw pointers into smart pointers
 
 //core libraries
 #include <string>
@@ -92,7 +92,7 @@ void init_ncurses()
 
 void wellcome()
 {
-	string gmVer = "build: v0.00.6 || 2016-07-15[13:45:00]Friday";
+	string gmVer = "build: v0.01.0 || 2016-08-24[21:47:00]Wednesday";
 	
 	print_cen(8, "Hello everyone.");
 	print_cen(10, "Welcome to ASCIIWORLD!");
