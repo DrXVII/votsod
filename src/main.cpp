@@ -119,7 +119,7 @@ void goodbye()
 {
 	clear();
 	print_cen(8, "I do hope you enjoyed your stay.");
-	print_cen(9, "Se you next time :)");
+	print_cen(9, "See you next time :)");
 	getch();
 }
 

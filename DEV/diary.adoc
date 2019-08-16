@@ -1,0 +1,14 @@
+= The Dev-Diary
+
+== Coming Back (2019-06-16)
+After a talk aobut roguelikes with a colelague, remembered I was working on
+this quite a while ago. Tried to build this project and skimmed over the code
+more than 3 years after last time I touched this. Honestly didn't think it was
+3 years already. I'm sure I still don't know what I'm doing, but I gues I
+learned at least a bit about software development, cause I can see a lot more
+problems with this code than I could think of back when I was developing,
+starting at the fundamental design level all the way to how and which utilities
+of the {cpp}11 are used.
+
+Maybe I should give this another shot as I feel I can combine a couple of
+projects I'm working/thinking about into one.

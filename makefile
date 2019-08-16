@@ -10,13 +10,16 @@ obj = main.o \
 binDir = bin/
 hDir = include
 
-all: votsod
+all: $(binDir) votsod 
 
 votsod: objects
 	$(comp) $(obj) -o $(binDir)votsod $(libs)
 
 objects: $(src)
 	$(comp) $(compOpt) src/*.cpp $(libs)
+
+$(binDir):
+	mkdir -p $@
 
 clean:
 	rm -fr *.o
